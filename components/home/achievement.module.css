@@ -1,6 +1,28 @@
 .icon {
   text-align: center;
 }
+.modalIcon {
+  text-align: center;
+  font-size: x-large;
+}
+.modalDescription {
+  text-align: center;
+  font-size: x-large;
+  font-style: italic;
+}
 .name {
   text-align: center;
+  font-size: medium;
+}
+
+.achievementModal {
+  background-color: #f5f8e5;
+}
+.modalBackButton {
+  background-color: #8ac926;
+  border-color: #6a9c24;
+}
+.modalBackButton:hover {
+  border-color: #6a9c24;
+  background-color: #6a9c24;
 }

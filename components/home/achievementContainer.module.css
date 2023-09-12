@@ -19,3 +19,7 @@
   font-size: larger;
   color: #f5f8e5;
 }
+
+.achievementColumn {
+  display: inline-flex;
+}

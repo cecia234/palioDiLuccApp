@@ -35,7 +35,7 @@ function getRows(achievements: IAchievement[]) {
     const rows = [];
     let a = [];
     for (let i = 0; i < achievements.length; i++) {
-        const element = <Col><Achievement data={achievements[i] || { name: '', icon: '' }}></Achievement></Col>;
+        const element = <Col className={styles.achievementColumn}><Achievement data={achievements[i] || { name: '', icon: '' }}></Achievement></Col>;
         if (i === 3 || i === 6) {
             rows.push(a);
             a = [];
