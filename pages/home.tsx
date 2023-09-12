@@ -21,6 +21,30 @@ const lastCompletedAchievements: IAchievement[] = [
         name: "Lo spisno",
         icon: "💧"
     },
+    {
+        name: "Cura Paliativa2",
+        icon: "☕"
+    },
+    {
+        name: "Il cacco2",
+        icon: "💩"
+    },
+    {
+        name: "Lo spisno2",
+        icon: "💧"
+    },
+    {
+        name: "Cura Paliativa3",
+        icon: "☕"
+    },
+    {
+        name: "Il cacco3",
+        icon: "💩"
+    },
+    {
+        name: "Lo spisno3",
+        icon: "💧"
+    },
 ];
 
 const nextAchievementsToComplete: IAchievement[] = [
@@ -34,6 +58,30 @@ const nextAchievementsToComplete: IAchievement[] = [
     },
     {
         name: "Zar",
+        icon: "🙅🏻‍♂️"
+    },
+    {
+        name: "Ferma al lucca comics? 2",
+        icon: "🤔"
+    },
+    {
+        name: "Sceicco 2",
+        icon: "🧔🏿‍♂️"
+    },
+    {
+        name: "Zar 2",
+        icon: "🙅🏻‍♂️"
+    },
+    {
+        name: "Ferma al lucca comics? 3",
+        icon: "🤔"
+    },
+    {
+        name: "Sceicco 3",
+        icon: "🧔🏿‍♂️"
+    },
+    {
+        name: "Zar 3",
         icon: "🙅🏻‍♂️"
     },
 ];
