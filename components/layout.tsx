@@ -1,5 +1,5 @@
 import styles from './layout.module.css';
-import NavigationBar from '../components/navbar';
+import NavigationBar from './navbar';
 
 
 export default function Layout({ children }) {
