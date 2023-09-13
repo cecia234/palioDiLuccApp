@@ -3,7 +3,6 @@
 }
 .modalIcon {
   text-align: center;
-  font-size: x-large;
 }
 .modalDescription {
   text-align: center;
@@ -19,10 +18,18 @@
   background-color: #f5f8e5;
 }
 .modalBackButton {
-  background-color: #8ac926;
-  border-color: #6a9c24;
+  background-color: #E82A26;
+  border-color: #E82A26;
 }
 .modalBackButton:hover {
+  border-color: #E82A26;
+  background-color: #E82A26;
+}
+.modalCompleteButton {
+  border-color:  #8ac926;
+  background-color:  #8ac926;
+}
+.modalCompleteButton:hover {
   border-color: #6a9c24;
   background-color: #6a9c24;
 }
