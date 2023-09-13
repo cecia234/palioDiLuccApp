@@ -63,8 +63,6 @@ export default function AddAchievementModal(props) {
                 </Modal.Footer>
             </Modal>
 
-
-
             <SetAchievementReviewerModal
                 show={showAchievementReviewerModal}
                 onHide={() => setShowAchievementReviewerModal(false)}

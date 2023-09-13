@@ -7,9 +7,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function NavigationBar() {
-    const expand = false;
+    const expand = true;
     return (
-        <Navbar  sticky="top"  expand={expand} className={styles.navbar}>
+        <Navbar sticky="top" expand={false} className={styles.navbar}>
             <Container fluid className={styles.navbar}>
                 <Link href="/">
                     <Image
@@ -33,6 +33,7 @@ export default function NavigationBar() {
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
                             <Link href="/">Home</Link>
+                            <Link href="/achievementList">Lista Achievement</Link>
                             <Link href="/leaderboard">Classifica</Link>
                             <Link href="/about">Dicono di noi</Link>
                         </Nav>
