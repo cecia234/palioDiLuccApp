@@ -1,14 +1,17 @@
 .icon {
   text-align: center;
 }
+
 .modalIcon {
   text-align: center;
 }
+
 .modalDescription {
   text-align: center;
   font-size: x-large;
   font-style: italic;
 }
+
 .name {
   text-align: center;
   font-size: medium;
@@ -17,19 +20,34 @@
 .achievementModal {
   background-color: #f5f8e5;
 }
+
 .modalBackButton {
   background-color: #E82A26;
   border-color: #E82A26;
 }
+
 .modalBackButton:hover {
   border-color: #E82A26;
   background-color: #E82A26;
 }
+
 .modalCompleteButton {
-  border-color:  #8ac926;
-  background-color:  #8ac926;
+  border-color: #8ac926;
+  background-color: #8ac926;
 }
+
 .modalCompleteButton:hover {
   border-color: #6a9c24;
   background-color: #6a9c24;
+}
+
+.itemList {
+  width: 100%;
+  height: 20em;
+  overflow-y: scroll;
+}
+
+.achievementDiv:hover {
+  background-color: #e1e4d0;
+  border-radius: 3px;
 }
