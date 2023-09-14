@@ -18,27 +18,27 @@
 }
 
 .achievementModal {
-  background-color: #f5f8e5;
+  background-color: var(--background-white);
 }
 
 .modalBackButton {
-  background-color: #E82A26;
-  border-color: #E82A26;
+  background-color: var(--red);
+  border-color: var(--red);
 }
 
 .modalBackButton:hover {
-  border-color: #E82A26;
-  background-color: #E82A26;
+  border-color: var(--red);
+  background-color: var(--red);
 }
 
 .modalCompleteButton {
-  border-color: #8ac926;
-  background-color: #8ac926;
+  border-color: var(--light-green);
+  background-color: var(--light-green);
 }
 
 .modalCompleteButton:hover {
-  border-color: #6a9c24;
-  background-color: #6a9c24;
+  border-color: var(--dark-green);
+  background-color: var(--dark-green);
 }
 
 .itemList {
@@ -48,6 +48,6 @@
 }
 
 .achievementDiv:hover {
-  background-color: #e1e4d0;
+  background-color: var(--background-white);
   border-radius: 3px;
 }

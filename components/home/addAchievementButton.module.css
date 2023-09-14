@@ -1,11 +1,11 @@
 .addAchievementButton {
-  background-color: #8ac926;
-  border-color: #6a9c24;
+  background-color: var(--light-green);
+  border-color: var(--dark-green);
   width: 100%;
 }
 
 .addAchievementButton:hover {
-  background-color: #6a9c24; 
-  border-color: #6a9c24; 
+  background-color: var(--dark-green);
+  border-color: var(--dark-green);
   width: 100%;
 }

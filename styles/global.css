@@ -1,3 +1,16 @@
+:root {
+  --light-red: #ff3c41;
+  --red: #e82a26;
+  --pale-green: #93A649;
+  --light-green: #8ac926;
+  --dark-green: #6a9c24;
+  --blue: #0070f3;
+  --bluette: #7ecdda;
+  --background-white: #f5f8e5;
+  --yellow: #fdc727;
+}
+
+
 html,
 body {
   padding: 0;
@@ -6,7 +19,7 @@ body {
     Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
   font-size: 18px;
-  background-color: #f5f8e5;
+  background-color: var(--background-white);
 }
 
 * {
@@ -14,7 +27,7 @@ body {
 }
 
 a {
-  color: #0070f3;
+  color: var(--blue);
   text-decoration: none;
 }
 
@@ -28,5 +41,5 @@ img {
 }
 
 #__next {
-  background-color: #f5f8e5;
+  background-color: var(--background-white);
 }

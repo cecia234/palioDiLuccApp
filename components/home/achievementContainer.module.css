@@ -1,23 +1,23 @@
 .divcolor {
-  border-color: #8ac926;
+  border-color: var(--light-green);
   border-style: solid;
   border-top-style: none;
   margin-top: 0;
 }
 
 .title {
-  background-image: linear-gradient(#FDC727 0%,
-      #FDC727 25%,
-      #E82A26 25%,
-      #E82A26 50%,
-      #93A649 50%,
-      #93A649 75%,
-      #7ECDDA 75%,
-      #7ECDDA 100%);
+  background-image: linear-gradient(var(--yellow) 0%,
+      var(--yellow) 25%,
+      var(--red) 25%,
+      var(--red) 50%,
+      var(--pale-green) 50%,
+      var(--pale-green) 75%,
+      var(--bluette) 75%,
+      var(--bluette) 100%);
   margin-bottom: 0;
   text-align: center;
   font-size: larger;
-  color: #f5f8e5;
+  color: var(--background-white);
 }
 
 .achievementColumn {
