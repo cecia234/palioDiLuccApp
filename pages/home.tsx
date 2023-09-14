@@ -2,6 +2,7 @@ import Layout from "../components/layout";
 import AddAchievementButton from "../components/home/addAchievementButton";
 import AchievementContainer from "../components/home/achievementContainer";
 import { Stack } from "react-bootstrap";
+import NewReviewAlert from "../components/home/newReviewAlert";
 
 export interface IAchievement {
     name: string,
@@ -125,13 +126,15 @@ const nextAchievementsToComplete: IAchievement[] = [
 ];
 
 export default function Home() {
+    const newRequests = true
     return <>
         <Layout>
             <h1>Il tuo palio di Lucca finora</h1>
             <Stack gap={3}>
-            <AddAchievementButton achievementsToComplete = {nextAchievementsToComplete}></AddAchievementButton>
-            <AchievementContainer title = "Ultimi Achievement completati" achievements={lastCompletedAchievements}></AchievementContainer>
-            <AchievementContainer title = "Prossimi Achievement consigliati" achievements={nextAchievementsToComplete}></AchievementContainer>
+                {newRequests ? <NewReviewAlert newRequests={4}></NewReviewAlert> : ''}
+                <AddAchievementButton achievementsToComplete={nextAchievementsToComplete}></AddAchievementButton>
+                <AchievementContainer title="Ultimi Achievement completati" achievements={lastCompletedAchievements}></AchievementContainer>
+                <AchievementContainer title="Prossimi Achievement consigliati" achievements={nextAchievementsToComplete}></AchievementContainer>
             </Stack>
         </Layout>
     </>
