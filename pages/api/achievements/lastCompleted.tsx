@@ -1,10 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { IAchievement } from '../../../lib/types';
+import { PrismaClient } from '@prisma/client'
+
+
+const prisma = new PrismaClient();
+
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-
+    // L'array commentato è un oggetto di default in caso non ci siano achievement disponibili
+    /*
     const lastCompletedAchievements: IAchievement[] = [
         {
             name: "Cura Paliativa",
@@ -60,9 +66,11 @@ export default async function handler(
             description: "Ottieni un’interazione di qualsiasi tipo con quelli dell’esercito. Punti bonus se dura almeno 5 minuti.",
             status: 'done',
         },
-    ];
+    ];*/
+    const user_achievements_codes = (await prisma.user_achievement.findMany({ where: { user: 'marione', status: 2 } })).map((ach) => ach.achievement);
+    const achievements = (await prisma.achievement.findMany({where: {name: {in: user_achievements_codes} }})).map((ach) => ({...ach, status: 'done'})) as any
 
     res.status(200).json({
-        lastCompletedAchievements
+        lastCompletedAchievements: achievements
     })
 }
