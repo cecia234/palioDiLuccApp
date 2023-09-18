@@ -8,8 +8,42 @@ datasource db {
 }
 
 model user {
-  username String @id @db.VarChar(50)
-  name     String
-  surname  String
-  mail     String
+  username                                                       String                @id @db.VarChar(50)
+  name                                                           String?
+  surname                                                        String?
+  mail                                                           String?
+  achievement_request_achievement_request_destination_userTouser achievement_request[] @relation("achievement_request_destination_userTouser")
+  achievement_request_achievement_request_requesting_userTouser  achievement_request[] @relation("achievement_request_requesting_userTouser")
+  user_achievement_user_achievement_userTouser                   user_achievement[]    @relation("user_achievement_userTouser")
+}
+
+model achievement {
+  name                                                             String                @id @db.VarChar(50)
+  description                                                      String?
+  icon                                                             String?               @db.VarChar(5)
+  difficulty                                                       Int?
+  achievement_request_achievement_request_achievementToachievement achievement_request[] @relation("achievement_request_achievementToachievement")
+  user_achievement_user_achievement_achievementToachievement       user_achievement[]    @relation("user_achievement_achievementToachievement")
+}
+
+model achievement_request {
+  requesting_user                                          String      @db.VarChar(50)
+  destination_user                                         String      @db.VarChar(50)
+  achievement                                              String      @db.VarChar(50)
+  status                                                   Int?
+  achievement_achievement_request_achievementToachievement achievement @relation("achievement_request_achievementToachievement", fields: [achievement], references: [name], onDelete: NoAction, onUpdate: NoAction, map: "fk_achievement_achievement_request")
+  user_achievement_request_destination_userTouser          user        @relation("achievement_request_destination_userTouser", fields: [destination_user], references: [username], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_achievement_request_receiver")
+  user_achievement_request_requesting_userTouser           user        @relation("achievement_request_requesting_userTouser", fields: [requesting_user], references: [username], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_achievement_request_sender")
+
+  @@id([requesting_user, destination_user, achievement])
+}
+
+model user_achievement {
+  user                                                  String      @db.VarChar(50)
+  achievement                                           String
+  status                                                Int?
+  achievement_user_achievement_achievementToachievement achievement @relation("user_achievement_achievementToachievement", fields: [achievement], references: [name], onDelete: NoAction, onUpdate: NoAction, map: "fk_achievement")
+  user_user_achievement_userTouser                      user        @relation("user_achievement_userTouser", fields: [user], references: [username], onDelete: NoAction, onUpdate: NoAction, map: "fk_user")
+
+  @@id([user, achievement])
 }
