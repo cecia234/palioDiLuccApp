@@ -1,6 +1,6 @@
 import Stack from 'react-bootstrap/Stack';
 
-import { IAchievement } from "../../pages/home";
+import { IAchievement} from "../../lib/types";
 import styles from './achievement.module.css';
 import {useState} from 'react';
 import ViewAchievementModal from './viewAchievementModal';

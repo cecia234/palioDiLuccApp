@@ -1,4 +1,4 @@
-import { IAchievement } from "../../pages/home";
+import { IAchievement, EAchievementStatus }  from "../../lib/types";
 import Achievement from "./achievement";
 import styles from './achievementContainer.module.css';
 import { Stack } from "react-bootstrap";
@@ -35,7 +35,7 @@ function getRows(achievements: IAchievement[]) {
     const rows = [];
     let a = [];
     for (let i = 0; i < achievements.length; i++) {
-        const element = <Col className={styles.achievementColumn}><Achievement data={achievements[i] || { name: '', icon: '' }}></Achievement></Col>;
+        const element = <Col className={styles.achievementColumn}><Achievement data={achievements[i] || { name: '', icon: '', status: EAchievementStatus.UNDONE }}></Achievement></Col>;
         if (i === 3 || i === 6) {
             rows.push(a);
             a = [];

@@ -1,13 +1,14 @@
-import { Header } from './index'
-import Table from 'react-bootstrap/table';
+import useSWR from 'swr';
+import { Header } from './index';
+import {Table} from 'react-bootstrap';
 import Layout from '../components/layout';
 import NavigationBar from '../components/navbar';
 
 interface IUserScore {
   username: string;
-  bronzes: number;
-  silvers: number;
-  golds: number;
+  bronze: number;
+  silver: number;
+  gold: number;
   total?: number;
   score?: number;
   pos?: number;
@@ -18,58 +19,66 @@ enum EMedalsPoints {
   SILVER = 3,
   BRONZE = 1
 }
-const userScores: IUserScore[] = [
+
+const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
+/*const userScores: IUserScore[] = [
   {
     username: "mario",
-    bronzes: 2,
-    silvers: 1,
-    golds: 1
+    bronze: 2,
+    silver: 1,
+    gold: 1
   },
   {
     username: "lorenzo",
-    bronzes: 5,
-    silvers: 1,
-    golds: 2
+    bronze: 5,
+    silver: 1,
+    gold: 2
   },
   {
     username: "nupas",
-    bronzes: 3,
-    silvers: 3,
-    golds: 3
+    bronze: 3,
+    silver: 3,
+    gold: 3
   },
   {
     username: "mara",
-    bronzes: 3,
-    silvers: 3,
-    golds: 2
+    bronze: 3,
+    silver: 3,
+    gold: 2
   },
   {
     username: "fra",
-    bronzes: 6,
-    silvers: 6,
-    golds: 2
+    bronze: 6,
+    silver: 6,
+    gold: 2
   },
   {
     username: "gio",
-    bronzes: 4,
-    silvers: 1,
-    golds: 5
+    bronze: 4,
+    silver: 1,
+    gold: 5
   },
   {
     username: "ciccio",
-    bronzes: 2,
-    silvers: 3,
-    golds: 2
+    bronze: 2,
+    silver: 3,
+    gold: 2
   },
   {
     username: "cecia",
-    bronzes: 1,
-    silvers: 3,
-    golds: 2
+    bronze: 1,
+    silver: 3,
+    gold: 2
   },
-];
+];*/
 export default function LeaderBoard() {
-
+  let userFetch = useSWR('/api/achievements/leaderBoard', fetcher)
+  let userScores = [];
+  if(userFetch.data) {
+    userScores = userFetch.data.users
+  } else {
+    return <h1>Loading...</h1>
+  }
   const sortedUsers = getOrderedUsers(userScores);
   sortedUsers.forEach((user, index) => {
     user.pos = index + 1
@@ -97,11 +106,11 @@ export default function LeaderBoard() {
             return (
               <tr>
                 <td>{user.pos}</td>
-                <td>{user.username}</td>
+                <td>{user.username === 'marione' ? <b>{user.username}</b> : user.username}</td>
                 <td>{user.score}</td>
-                <td>{user.bronzes}</td>
-                <td>{user.silvers}</td>
-                <td>{user.golds}</td>
+                <td>{user.bronze}</td>
+                <td>{user.silver}</td>
+                <td>{user.gold}</td>
                 <td>{user.total}</td>
               </tr>
             )
@@ -118,8 +127,8 @@ function getOrderedUsers(users: IUserScore[]) {
 }
 
 function calcTotalMedals(userScore: IUserScore) {
-  return userScore.bronzes + userScore.silvers + userScore.golds
+  return userScore.bronze + userScore.silver+ userScore.gold
 }
 function calcTotalScore(userScore: IUserScore) {
-  return userScore.bronzes * EMedalsPoints.BRONZE + userScore.silvers * EMedalsPoints.SILVER + userScore.golds * EMedalsPoints.GOLD
+  return userScore.bronze * EMedalsPoints.BRONZE + userScore.silver * EMedalsPoints.SILVER + userScore.gold * EMedalsPoints.GOLD
 }

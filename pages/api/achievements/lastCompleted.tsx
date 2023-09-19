@@ -1,5 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { IAchievement } from '../../../lib/types';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client'
 
 
@@ -67,10 +66,17 @@ export default async function handler(
             status: 'done',
         },
     ];*/
-    const user_achievements_codes = (await prisma.user_achievement.findMany({ where: { user: 'marione', status: 2 } })).map((ach) => ach.achievement);
-    const achievements = (await prisma.achievement.findMany({where: {name: {in: user_achievements_codes} }})).map((ach) => ({...ach, status: 'done'})) as any
-
+    const user_achievements_codes = (await prisma.user_achievement.findMany({ 
+        where: { 
+            user: 'marione', 
+            status: 2
+        },
+        include: {
+            achievement_user_achievement_achievementToachievement: true
+        }
+    })).map((ach) => ach.achievement_user_achievement_achievementToachievement)
+    
     res.status(200).json({
-        lastCompletedAchievements: achievements
+        lastCompletedAchievements: user_achievements_codes
     })
 }
