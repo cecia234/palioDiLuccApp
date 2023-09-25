@@ -19,21 +19,23 @@ export default function Home() {
     let userFetch = useSWR('/api/user', fetcher)
     const lastAchievementFetch = useSWR('/api/achievements/lastCompleted', fetcher)
     const nextAchievementFetch = useSWR('/api/achievements/nextToComplete', fetcher)
+    const numRequestsFetch = useSWR('/api/achievements/numRequests', fetcher)
     let nextAchievementsToComplete: IAchievement[];
     let lastCompletedAchievements: IAchievement[];
     let user: IUser;
 
-    let newRequests = true
+    let newRequests: number;
 
     nextAchievementsToComplete = nextAchievementFetch.data ? nextAchievementFetch.data.nextAchievementsToComplete : [];
     lastCompletedAchievements = lastAchievementFetch.data ? lastAchievementFetch.data.lastCompletedAchievements : [];
     user = userFetch.data ? userFetch.data.user : '';
+    newRequests = numRequestsFetch.data ? numRequestsFetch.data.numRequests : 0;
 
     return <>
         <Layout>
             <h1>Ciao {user.name}, ecco il tuo palio di Lucca finora</h1>
             <Stack gap={3}>
-                {newRequests ? <NewReviewAlert newRequests={4}></NewReviewAlert> : ''}
+                {newRequests ? <NewReviewAlert newRequests={newRequests}></NewReviewAlert> : ''}
                 <AddAchievementButton achievementsToComplete={nextAchievementsToComplete}></AddAchievementButton>
                 <AchievementContainer title="Ultimi Achievement completati" achievements={lastCompletedAchievements}></AchievementContainer>
                 <AchievementContainer title="Prossimi Achievement consigliati" achievements={nextAchievementsToComplete}></AchievementContainer>
