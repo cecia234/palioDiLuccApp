@@ -9,18 +9,39 @@ export default async function handler(
     res: NextApiResponse
 ) {
 
+    if(req.method === 'GET') {
+        const requests = (await prisma.achievement_request.findMany({ 
+            where: { 
+                destination_user: req.body.users || 'marione', 
+                status: 0
+            },
+            include: {
+                achievement_achievement_request_achievementToachievement: true
+            }
+        }));
+    
+        res.status(200).json({
+            requests
+        })
+    } else {
+        const requesting_user = req.body.requesting
+        const destination_user = req.body.destination
+        const achievement = req.body.name
+        const result = req.body.result
+        
+        await prisma.achievement_request.update({
+            where: {
+                requesting_user_destination_user_achievement: {
+                    destination_user: destination_user,
+                    requesting_user: requesting_user,
+                    achievement
+                }
+            },
+            data: {
+                status: result
+            }
+        })
 
-    const requests = (await prisma.achievement_request.findMany({ 
-        where: { 
-            destination_user: req.body.users || 'marione', 
-            status: 0
-        },
-        include: {
-            achievement_achievement_request_achievementToachievement: true
-        }
-    }));
-
-    res.status(200).json({
-        requests
-    })
+        res.status(200);
+    }
 }

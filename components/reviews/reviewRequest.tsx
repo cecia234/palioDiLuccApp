@@ -1,3 +1,4 @@
+import useSWR from 'swr';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
@@ -42,7 +43,7 @@ export default function ReviewRequest({ item }) {
             </Modal.Body>
             <Modal.Footer className={styles.achievementModal}>
                 <Button onClick={handleCloseOk} className={styles.modalReviewBackButton}>Indietro</Button>
-                <Button onClick={() => { console.log('TODO: manda richiesta testimonianza'); handleCloseOk() }} className={styles.modalReviewButton}>Testimonia</Button>
+                <Button onClick={ () => { sendTestimonianza(item , 2); handleCloseOk() }} className={styles.modalReviewButton}>Testimonia</Button>
             </Modal.Footer>
         </Modal>
         <Modal
@@ -60,9 +61,25 @@ export default function ReviewRequest({ item }) {
             </Modal.Body>
             <Modal.Footer className={styles.achievementModal}>
                 <Button onClick={handleCloseNo} className={styles.modalReviewBackButton}>Indietro</Button>
-                <Button onClick={() => { console.log('TODO: manda richiesta rifiuto testimonianza'); handleCloseNo() }} className={styles.modalReviewButton}>Rifiuta testimonianza</Button>
+                <Button onClick={() => {  sendTestimonianza(item , 1); handleCloseNo() }} className={styles.modalReviewButton}>Rifiuta testimonianza</Button>
             </Modal.Footer>
         </Modal>
     </>
     )
+}
+
+function sendTestimonianza(item, status) {
+    fetch('/api/achievements/requests', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "requesting": item.user,
+            "destination": 'marione',
+            "name": item.name,
+            "result": status
+        })
+    })
 }
