@@ -1,3 +1,4 @@
+import useSWR from 'swr';
 import { Stack } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 
@@ -32,13 +33,30 @@ const reviews = [
     },
 ]
 
+
+const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
+
+
 export default function Reviews() {
+
+
+    const lastAchievementFetch = useSWR('/api/achievements/requests', fetcher)
+
+    let reviewsRequests = lastAchievementFetch.data ? lastAchievementFetch.data.requests : [];
+    reviewsRequests = reviewsRequests.map((item) => {
+        return {
+            user: item.requesting_user,
+            name: item.achievement_achievement_request_achievementToachievement.name,
+            icon: item.achievement_achievement_request_achievementToachievement.icon,
+            description: item.achievement_achievement_request_achievementToachievement.description
+        }
+    })
     return <>
         <Layout>
             <h1>Hai le seguenti richieste di testimonianza</h1>
             <Stack gap={3}>
                 {
-                    reviews.map((item) => <ReviewRequest item={item}></ReviewRequest>)
+                    reviewsRequests.map((item) => <ReviewRequest item={item}></ReviewRequest>)
                 }
             </Stack>
         </Layout>
