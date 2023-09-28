@@ -11,15 +11,15 @@ interface IUser {
 
 const reviewers: IUser[] = [
     {
-        username: 'ciccio',
+        username: 'cicc55',
         propic: '🧔🏻‍♂️'
     },
     {
-        username: 'mario',
+        username: 'marione',
         propic: '👨🏻‍🦲'
     },
     {
-        username: 'giovanni',
+        username: 'scarredgio',
         propic: '👨🏻'
     },
 ]
@@ -39,6 +39,8 @@ export default function SetAchievementReviewerModal(props) {
 
         setFilteredList(filtered);
     };
+
+    const achievement = props.data
 
     return (
         <>
@@ -63,7 +65,7 @@ export default function SetAchievementReviewerModal(props) {
                             {filteredList.map((item) => (
                                 <div className={styles.achievementDiv} key={item.username} onClick={() => {
                                     props.onHide()
-                                    alert("TODO: invia richiesta reviewer")
+                                    sendAchievementRequest(achievement.name, item.username)
                                 }}><p>{item.propic} <b>{item.username}</b></p></div>
                             ))}
                         </div>
@@ -75,4 +77,19 @@ export default function SetAchievementReviewerModal(props) {
             </Modal>
         </>
     );
+}
+
+function sendAchievementRequest(achievementName, username) {
+    fetch('/api/achievements/requests/make', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "requesting": 'marione', // TODO
+            "destination": username,
+            "name": achievementName
+        })
+    })
 }

@@ -69,7 +69,7 @@ export default function ReviewRequest({ item }) {
 }
 
 function sendTestimonianza(item, status) {
-    fetch('/api/achievements/requests', {
+    fetch('/api/achievements/requests/confirm', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

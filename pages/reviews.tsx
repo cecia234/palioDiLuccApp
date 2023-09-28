@@ -40,7 +40,7 @@ const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
 export default function Reviews() {
 
 
-    const lastAchievementFetch = useSWR('/api/achievements/requests', fetcher)
+    const lastAchievementFetch = useSWR('/api/achievements/requests/pending', fetcher)
 
     let reviewsRequests = lastAchievementFetch.data ? lastAchievementFetch.data.requests : [];
     reviewsRequests = reviewsRequests.map((item) => {
