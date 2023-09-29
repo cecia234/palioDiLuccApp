@@ -1,31 +1,24 @@
+import useSWR from 'swr';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 import styles from './achievement.module.css';
-
+import { fetcher } from '../../utils/fetchUtils';
 interface IUser {
     username: string,
     propic: string
 }
 
-const reviewers: IUser[] = [
-    {
-        username: 'cicc55',
-        propic: '🧔🏻‍♂️'
-    },
-    {
-        username: 'marione',
-        propic: '👨🏻‍🦲'
-    },
-    {
-        username: 'scarredgio',
-        propic: '👨🏻'
-    },
-]
-
 export default function SetAchievementReviewerModal(props) {
-    const [originalList, setOriginalList] = useState(reviewers);
+
+    let userFetch = useSWR('/api/users/all', fetcher)
+    const currentUser = 'marione';
+
+    let users = userFetch.data ? userFetch.data.users : [];
+    users = users.filter((u) => u.username !== currentUser);
+
+    const [originalList, setOriginalList] = useState(users);
     const [filteredList, setFilteredList] = useState(originalList);
     const [searchText, setSearchText] = useState('');
     const handleInputChange = (e) => {
@@ -66,7 +59,7 @@ export default function SetAchievementReviewerModal(props) {
                                 <div className={styles.achievementDiv} key={item.username} onClick={() => {
                                     props.onHide()
                                     sendAchievementRequest(achievement.name, item.username)
-                                }}><p>{item.propic} <b>{item.username}</b></p></div>
+                                }}><p>🙃️ <b>{item.username}</b></p></div>
                             ))}
                         </div>
                     </div>

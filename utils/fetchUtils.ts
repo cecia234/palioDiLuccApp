@@ -1,0 +1,1 @@
+export const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
