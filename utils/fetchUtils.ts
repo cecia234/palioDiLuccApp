@@ -7,7 +7,7 @@ export function getAllUsers() {
     const { data, error, isLoading } = useSWR('/api/users/all', fetcher);
 
     return {
-        usersa: data,
+        users: data ? data.users : undefined,
         isError: error,
         isLoading
     }

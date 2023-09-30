@@ -12,7 +12,7 @@ import { fetcher } from '../../utils/fetchUtils';
 
 export default function AddAchievementModal(props) {
 
-    let {achievementsToComplete, users, ...rest} = props;
+    let { achievementsToComplete, ...rest } = props;
     const [originalList, setOriginalList] = useState(achievementsToComplete);
     if (originalList !== achievementsToComplete) { // don't update unnecessarily
         setOriginalList(achievementsToComplete);
@@ -76,7 +76,6 @@ export default function AddAchievementModal(props) {
                 show={showAchievementReviewerModal}
                 onHide={() => setShowAchievementReviewerModal(false)}
                 data={selectedAchievement}
-                users={users}
             />
         </>
     );

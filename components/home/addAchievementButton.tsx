@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AddAchievementModal from './addAchievementModal';
 import { IUser, IAchievement } from '../../lib/types';
 
-export default function AddAchievementButton({ achievementsToComplete, users }: { achievementsToComplete: IAchievement[], users: IUser[] }) {
+export default function AddAchievementButton({ achievementsToComplete }: { achievementsToComplete: IAchievement[] }) {
     const [modalShow, setModalShow] = useState(false);
     return (
         <>
@@ -16,7 +16,6 @@ export default function AddAchievementButton({ achievementsToComplete, users }: 
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 achievementsToComplete={achievementsToComplete}
-                users ={users}
             />
         </>
     )

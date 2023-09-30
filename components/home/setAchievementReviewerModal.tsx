@@ -13,30 +13,33 @@ interface IUser {
 
 
 export default function SetAchievementReviewerModal(p) {
-    let {users, data, ...props} = p;
+    let { data, ...props } = p;
     const currentUser = 'marione';
 
-    let {usersa, isError, isLoading} = getAllUsers()
+    let { users, isError, isLoading } = getAllUsers()
 
     if (isLoading) return <Spinner />
     if (isError) return <div >Loading</div>
-    const originalList = usersa;
-    let filteredList = originalList;
+    const originalList = users.filter((u) => u.username !== currentUser);
 
-    let searchText = '';
+    return <Modalina achievement={data} originalList={originalList} {...props}></Modalina>
+}
+
+function Modalina(p) {
+    let { achievement, originalList, ...props } = p;
+    let [filteredList, setFilteredList] = useState(originalList)
+    let [searchText, setSearchText] = useState('')
     const handleInputChange = (e) => {
         const newText = e.target.value;
-        searchText = newText;
 
         // Filtra la lista originale in base al testo di input
         const filtered = originalList.filter((item) =>
             item.username.toLowerCase().includes(newText.toLowerCase())
         );
 
-        filteredList = filtered;
+        setFilteredList(filtered);
+        setSearchText(newText);
     };
-
-    const achievement = props.data
 
     return (
         <>
