@@ -8,9 +8,9 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-
+    // TODO: prendere tutti gli achievements da tabella "achievement" e associare lo status trovato in "user_achievement"
     const user_achievements_codes = (await prisma.user_achievement.findMany({
-        where: { 
+        where: {
             user: 'marione',
         },
         include: {
@@ -22,7 +22,7 @@ export default async function handler(
         icon: el.achievement_user_achievement_achievementToachievement.icon,
         status: el.status
     }))
-    
+
     res.status(200).json({
         achievements: user_achievements_codes
     })
