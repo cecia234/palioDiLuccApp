@@ -1,17 +1,26 @@
 import { useState } from 'react';
+import useSWR from 'swr';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 import styles from './achievement.module.css';
 import SetAchievementReviewerModal from './setAchievementReviewerModal';
-
+import { fetcher } from '../../utils/fetchUtils';
 
 
 
 
 export default function AddAchievementModal(props) {
-    const [originalList, setOriginalList] = useState(props.achievementsToComplete);
+
+    let {achievementsToComplete, users, ...rest} = props;
+    const [originalList, setOriginalList] = useState(achievementsToComplete);
+    if (originalList !== achievementsToComplete) { // don't update unnecessarily
+        setOriginalList(achievementsToComplete);
+    }
     const [filteredList, setFilteredList] = useState(originalList);
+    if (filteredList !== originalList) { // don't update unnecessarily
+        setFilteredList(originalList);
+    }
     const [searchText, setSearchText] = useState('');
     const [showAchievementReviewerModal, setShowAchievementReviewerModal] = useState(false);
     const [selectedAchievement, setSelectedAchievement] = useState({ icon: '', name: '', description: '', status: 'undone' })
@@ -35,7 +44,7 @@ export default function AddAchievementModal(props) {
     return (
         <>
             <Modal
-                {...props}
+                {...rest}
                 centered
             >
                 <Modal.Header closeButton className={styles.achievementModal}>
@@ -59,7 +68,7 @@ export default function AddAchievementModal(props) {
                     </div>
                 </Modal.Body>
                 <Modal.Footer className={styles.achievementModal}>
-                    <Button onClick={props.onHide} className={styles.modalBackButton}>Indietro</Button>
+                    <Button onClick={rest.onHide} className={styles.modalBackButton}>Indietro</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -67,6 +76,7 @@ export default function AddAchievementModal(props) {
                 show={showAchievementReviewerModal}
                 onHide={() => setShowAchievementReviewerModal(false)}
                 data={selectedAchievement}
+                users={users}
             />
         </>
     );
