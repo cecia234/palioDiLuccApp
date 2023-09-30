@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import styles from './addAchievementButton.module.css';
-import { IAchievement } from '../../pages/home';
 import { useState } from 'react';
 import AddAchievementModal from './addAchievementModal';
+import { IUser, IAchievement } from '../../lib/types';
 
 export default function AddAchievementButton({ achievementsToComplete }: { achievementsToComplete: IAchievement[] }) {
     const [modalShow, setModalShow] = useState(false);

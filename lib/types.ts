@@ -10,3 +10,10 @@ export enum EAchievementStatus {
     PENDING = 1,
     DONE = 2,
 }
+
+export interface IUser {
+    username: string,
+    name: string,
+    surname: string,
+    email: string
+}

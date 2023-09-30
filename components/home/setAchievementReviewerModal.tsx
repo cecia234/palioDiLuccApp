@@ -1,29 +1,36 @@
 import useSWR from 'swr';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 import styles from './achievement.module.css';
-import { fetcher } from '../../utils/fetchUtils';
+import { getAllUsers } from '../../utils/fetchUtils';
+import { Spinner } from 'react-bootstrap';
 interface IUser {
     username: string,
     propic: string
 }
 
-export default function SetAchievementReviewerModal(props) {
 
-    let userFetch = useSWR('/api/users/all', fetcher)
+export default function SetAchievementReviewerModal(p) {
+    let { data, ...props } = p;
     const currentUser = 'marione';
 
-    let users = userFetch.data ? userFetch.data.users : [];
-    users = users.filter((u) => u.username !== currentUser);
+    let { users, isError, isLoading } = getAllUsers()
 
-    const [originalList, setOriginalList] = useState(users);
-    const [filteredList, setFilteredList] = useState(originalList);
-    const [searchText, setSearchText] = useState('');
+    if (isLoading) return <Spinner />
+    if (isError) return <div >Loading</div>
+    const originalList = users.filter((u) => u.username !== currentUser);
+
+    return <Modalina achievement={data} originalList={originalList} {...props}></Modalina>
+}
+
+function Modalina(p) {
+    let { achievement, originalList, ...props } = p;
+    let [filteredList, setFilteredList] = useState(originalList)
+    let [searchText, setSearchText] = useState('')
     const handleInputChange = (e) => {
         const newText = e.target.value;
-        setSearchText(newText);
 
         // Filtra la lista originale in base al testo di input
         const filtered = originalList.filter((item) =>
@@ -31,9 +38,8 @@ export default function SetAchievementReviewerModal(props) {
         );
 
         setFilteredList(filtered);
+        setSearchText(newText);
     };
-
-    const achievement = props.data
 
     return (
         <>

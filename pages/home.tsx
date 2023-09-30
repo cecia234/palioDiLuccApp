@@ -4,14 +4,8 @@ import AddAchievementButton from "../components/home/addAchievementButton";
 import AchievementContainer from "../components/home/achievementContainer";
 import { Stack } from "react-bootstrap";
 import NewReviewAlert from "../components/home/newReviewAlert";
-import { IAchievement } from '../lib/types';
+import { IAchievement, IUser } from '../lib/types';
 
-interface IUser {
-    username: string,
-    name: string,
-    surname: string,
-    email: string
-}
 
 const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
 
