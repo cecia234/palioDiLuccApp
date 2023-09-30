@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 import styles from './achievement.module.css';
+import { EAchievementStatus } from '../../lib/types';
 
 
 export default function ViewAchievementModal(props) {
@@ -28,7 +29,7 @@ export default function ViewAchievementModal(props) {
             <Modal.Footer className={styles.achievementModal}>
                 <Button onClick={props.onHide} className={styles.modalBackButton}>Indietro</Button>
                 {
-                    props.data.status === 'undone' ?
+                    props.data.status === EAchievementStatus.UNDONE ?
                         <Button onClick={props.onAdd} className={styles.modalCompleteButton}>Completa</Button> : null
                 }
             </Modal.Footer>

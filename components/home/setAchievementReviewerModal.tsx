@@ -65,7 +65,7 @@ function Modalina(p) {
                                 <div className={styles.achievementDiv} key={item.username} onClick={() => {
                                     props.onHide()
                                     sendAchievementRequest(achievement.name, item.username)
-                                }}><p>🙃️ <b>{item.username}</b></p></div>
+                                }}><p>{item.propic}  <b>{item.username}</b></p></div>
                             ))}
                         </div>
                     </div>
