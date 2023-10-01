@@ -12,7 +12,7 @@ const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
 export default function Home() {
     let userFetch = useSWR('/api/users/current', fetcher)
     const lastAchievementFetch = useSWR('/api/achievements/lastCompleted', fetcher)
-    const nextAchievementFetch = useSWR('/api/achievements/nextToComplete', fetcher)
+    const nextAchievementFetch = useSWR('/api/achievements/nextToComplete/9', fetcher)
     const numRequestsFetch = useSWR('/api/achievements/numRequests', fetcher)
     let nextAchievementsToComplete: IAchievement[];
     let lastCompletedAchievements: IAchievement[];

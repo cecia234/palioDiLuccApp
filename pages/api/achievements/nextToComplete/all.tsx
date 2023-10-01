@@ -8,11 +8,6 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    let limit: number;
-    if (req.body.limit) {
-        limit = req.body.limit;
-    }
-
     const user_achievements = await prisma.user_achievement.findMany({
         where: {
             user: 'marione'
@@ -24,8 +19,7 @@ export default async function handler(
             name: {
                 notIn: user_achievements.map((ach) => ach.achievement)
             }
-        },
-        take: limit
+        }
     }))
 
     res.status(200).json({
