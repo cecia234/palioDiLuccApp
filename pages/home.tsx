@@ -5,11 +5,30 @@ import AchievementContainer from "../components/home/achievementContainer";
 import { Stack } from "react-bootstrap";
 import NewReviewAlert from "../components/home/newReviewAlert";
 import { IAchievement, IUser } from '../lib/types';
+import {useEffect} from 'react';
+import { onAuthStateChanged } from "firebase/auth";
+import {auth} from '../firebaseConfig'
 
 
 const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
 
 export default function Home() {
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              const uid = user.uid;
+              // ...
+              console.log("uid", uid)
+            } else {
+              // User is signed out
+              // ...
+              console.log("user is logged out")
+            }
+          });
+         
+    }, [])
     let userFetch = useSWR('/api/users/current', fetcher)
     const lastAchievementFetch = useSWR('/api/achievements/lastCompleted', fetcher)
     const nextAchievementFetch = useSWR('/api/achievements/nextToComplete/9', fetcher)

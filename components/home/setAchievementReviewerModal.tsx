@@ -20,7 +20,8 @@ export default function SetAchievementReviewerModal(p) {
 
     if (isLoading) return <Spinner />
     if (isError) return <div >Loading</div>
-    const originalList = users.filter((u) => u.username !== currentUser);
+    const originalList = users.filter((u)=> u.username !== currentUser);
+    let filteredList = originalList;
 
     return <Modalina achievement={data} originalList={originalList} {...props}></Modalina>
 }

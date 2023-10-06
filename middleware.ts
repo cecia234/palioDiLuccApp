@@ -10,5 +10,5 @@ export function middleware(request: NextRequest) {
 }
 
 function isAuthenticated(rquest: NextRequest) {
-    return false;
+    return true;
 }
