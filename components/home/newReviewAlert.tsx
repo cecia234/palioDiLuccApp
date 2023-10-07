@@ -1,8 +1,16 @@
 import Link from 'next/link';
+import useSWR from 'swr';
 import Alert from 'react-bootstrap/Alert';
 
+import { fetcher } from '../../utils/fetchUtils';
 
-export default function NewReviewAlert({ newRequests }) {
+
+export default function NewReviewAlert() {
+
+    const numRequestsFetch = useSWR('/api/achievements/numRequests', fetcher)
+
+    let newRequests = numRequestsFetch.data ? numRequestsFetch.data.numRequests : 0;
+
     return (
         <Link href="/reviews">
             <Alert variant='warning'>

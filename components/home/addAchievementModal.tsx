@@ -8,11 +8,11 @@ import SetAchievementReviewerModal from './setAchievementReviewerModal';
 import { fetcher } from '../../utils/fetchUtils';
 
 
-
-
 export default function AddAchievementModal(props) {
+    const nextAchievementFetch = useSWR('/api/achievements/nextToComplete/all', fetcher);
 
-    let { achievementsToComplete, ...rest } = props;
+    const achievementsToComplete = nextAchievementFetch.data ? nextAchievementFetch.data.nextAchievementsToComplete : [];
+
     const [originalList, setOriginalList] = useState(achievementsToComplete);
     if (originalList !== achievementsToComplete) { // don't update unnecessarily
         setOriginalList(achievementsToComplete);
@@ -44,7 +44,7 @@ export default function AddAchievementModal(props) {
     return (
         <>
             <Modal
-                {...rest}
+                {...props}
                 centered
             >
                 <Modal.Header closeButton className={styles.achievementModal}>
@@ -68,7 +68,7 @@ export default function AddAchievementModal(props) {
                     </div>
                 </Modal.Body>
                 <Modal.Footer className={styles.achievementModal}>
-                    <Button onClick={rest.onHide} className={styles.modalBackButton}>Indietro</Button>
+                    <Button onClick={props.onHide} className={styles.modalBackButton}>Indietro</Button>
                 </Modal.Footer>
             </Modal>
 

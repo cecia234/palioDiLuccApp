@@ -1,10 +1,11 @@
 import Button from 'react-bootstrap/Button';
-import styles from './addAchievementButton.module.css';
 import { useState } from 'react';
-import AddAchievementModal from './addAchievementModal';
-import { IUser, IAchievement } from '../../lib/types';
 
-export default function AddAchievementButton({ achievementsToComplete }: { achievementsToComplete: IAchievement[] }) {
+import styles from './addAchievementButton.module.css';
+import AddAchievementModal from './addAchievementModal';
+
+
+export default function AddAchievementButton() {
     const [modalShow, setModalShow] = useState(false);
     return (
         <>
@@ -15,7 +16,6 @@ export default function AddAchievementButton({ achievementsToComplete }: { achie
             <AddAchievementModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                achievementsToComplete={achievementsToComplete}
             />
         </>
     )
