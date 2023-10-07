@@ -12,7 +12,8 @@ import { auth } from '../../firebaseConfig';
 
 
 export default function AddAchievementModal(props) {
-    const nextAchievementFetch = useSWR(`/api/achievements/nextToComplete/HHoyw2EzJYhwcmfeWoCr1y2K0Dh1/all`, fetcher); // TODO change
+    const uid = 'HHoyw2EzJYhwcmfeWoCr1y2K0Dh1'; // TODO change
+    const nextAchievementFetch = useSWR(`/api/achievements/nextToComplete/${uid}/all`, fetcher);
     const achievementsToComplete = nextAchievementFetch.data ? nextAchievementFetch.data.nextAchievementsToComplete : [];
 
     const [filteredList, setFilteredList] = useState(achievementsToComplete);
@@ -74,6 +75,7 @@ export default function AddAchievementModal(props) {
                 show={showAchievementReviewerModal}
                 onHide={() => setShowAchievementReviewerModal(false)}
                 data={selectedAchievement}
+                uid={uid}
             />
         </>
     );

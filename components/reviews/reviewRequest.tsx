@@ -6,7 +6,7 @@ import { useState } from 'react';
 import styles from './reviewsRequest.module.css'
 
 
-export default function ReviewRequest({ item }) {
+export default function ReviewRequest({ item, uid }) {  // TODO rimuovi uid
     const [showOk, setShowOk] = useState(false);
     const handleCloseOk = () => setShowOk(false);
     const handleShowOk = () => setShowOk(true);
@@ -43,7 +43,7 @@ export default function ReviewRequest({ item }) {
             </Modal.Body>
             <Modal.Footer className={styles.achievementModal}>
                 <Button onClick={handleCloseOk} className={styles.modalReviewBackButton}>Indietro</Button>
-                <Button onClick={ () => { sendTestimonianza(item , 2); handleCloseOk() }} className={styles.modalReviewButton}>Testimonia</Button>
+                <Button onClick={() => { sendTestimonianza(item, 2, uid); handleCloseOk() /*TODO rimuovi uid*/ }} className={styles.modalReviewButton}>Testimonia</Button>
             </Modal.Footer>
         </Modal>
         <Modal
@@ -61,14 +61,14 @@ export default function ReviewRequest({ item }) {
             </Modal.Body>
             <Modal.Footer className={styles.achievementModal}>
                 <Button onClick={handleCloseNo} className={styles.modalReviewBackButton}>Indietro</Button>
-                <Button onClick={() => {  sendTestimonianza(item , 1); handleCloseNo() }} className={styles.modalReviewButton}>Rifiuta testimonianza</Button>
+                <Button onClick={() => { sendTestimonianza(item, 1, uid); handleCloseNo() /*TODO rimuovi uid*/ }} className={styles.modalReviewButton}>Rifiuta testimonianza</Button>
             </Modal.Footer>
         </Modal>
     </>
     )
 }
 
-function sendTestimonianza(item, status) {
+function sendTestimonianza(item, status, uid) {/*TODO rimuovi uid*/
     fetch('/api/achievements/requests/confirm', {
         method: 'POST',
         headers: {
@@ -77,7 +77,7 @@ function sendTestimonianza(item, status) {
         },
         body: JSON.stringify({
             "requesting": item.user,
-            "destination": 'marione',
+            "destination": uid,/*TODO rimuovi uid*/
             "name": item.name,
             "result": status
         })

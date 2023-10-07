@@ -5,9 +5,9 @@ import Alert from 'react-bootstrap/Alert';
 import { fetcher } from '../../utils/fetchUtils';
 
 
-export default function NewReviewAlert() {
+export default function NewReviewAlert({ userUid }) {
 
-    const numRequestsFetch = useSWR('/api/achievements/numRequests', fetcher)
+    const numRequestsFetch = useSWR(`/api/achievements/numRequests/${userUid}`, fetcher)
 
     let newRequests = numRequestsFetch.data ? numRequestsFetch.data.numRequests : 0;
 

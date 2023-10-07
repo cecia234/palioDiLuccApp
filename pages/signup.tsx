@@ -56,7 +56,7 @@ const SignUp = () => {
           <Form.Control type="password" placeholder="Ripeti la password" onChange={onPwd2Input} />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Log in
+          Registrati
         </Button>
       </Form>
     </>

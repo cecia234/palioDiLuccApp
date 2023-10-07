@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 
 import Layout from "../components/layout";
 import { auth } from '../firebaseConfig';
+import Link from "next/link";
 
 
 export default function Login() {
@@ -53,6 +54,8 @@ export default function Login() {
       <Button variant="primary" type="submit">
         Log in
       </Button>
+
+      <div>Oppure <Link href="/signup">registrati</Link></div>
     </Form>
   </>)
 }

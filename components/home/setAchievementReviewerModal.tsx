@@ -13,21 +13,19 @@ interface IUser {
 
 
 export default function SetAchievementReviewerModal(p) {
-    let { data, ...props } = p;
-    const currentUser = 'marione';
+    let { data, uid, ...props } = p; // TODO rimuovi uid
 
     let { users, isError, isLoading } = getAllUsers()
 
     if (isLoading) return <Spinner />
     if (isError) return <div >Loading</div>
-    const originalList = users.filter((u)=> u.username !== currentUser);
-    let filteredList = originalList;
+    const originalList = users.filter((u) => u.uid !== uid); // TODO rimuovi uid
 
-    return <Modalina achievement={data} originalList={originalList} {...props}></Modalina>
+    return <Modalina uid={uid} achievement={data} originalList={originalList} {...props}></Modalina> // TODO rimuovi uid
 }
 
 function Modalina(p) {
-    let { achievement, originalList, ...props } = p;
+    let { uid, achievement, originalList, ...props } = p; // TODO rimuovi uid
     let [filteredList, setFilteredList] = useState(originalList)
     let [searchText, setSearchText] = useState('')
     const handleInputChange = (e) => {
@@ -65,7 +63,7 @@ function Modalina(p) {
                             {filteredList.map((item) => (
                                 <div className={styles.achievementDiv} key={item.username} onClick={() => {
                                     props.onHide()
-                                    sendAchievementRequest(achievement.name, item.username)
+                                    sendAchievementRequest(achievement.name, uid, item.username) // TODO rimuovi uid
                                 }}><p>{item.propic}  <b>{item.username}</b></p></div>
                             ))}
                         </div>
@@ -79,7 +77,7 @@ function Modalina(p) {
     );
 }
 
-function sendAchievementRequest(achievementName, username) {
+function sendAchievementRequest(achievementName, uid, username) {
     fetch('/api/achievements/requests/make', {
         method: 'POST',
         headers: {
@@ -87,7 +85,7 @@ function sendAchievementRequest(achievementName, username) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "requesting": 'marione', // TODO
+            "requesting": uid,  // TODO rimuovi uid
             "destination": username,
             "name": achievementName
         })

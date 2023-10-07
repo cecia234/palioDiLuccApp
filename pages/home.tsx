@@ -42,7 +42,7 @@ export default function Home() {
     <h1>Ciao {user.name}, ecco il tuo palio di Lucca finora</h1>
     <Stack gap={3}>
       <Button variant='danger' onClick={() => signOut(auth)}>Logout</Button>
-      <NewReviewAlert></NewReviewAlert>
+      <NewReviewAlert userUid={userUid}></NewReviewAlert>
       <AddAchievementButton></AddAchievementButton>
       <AchievementContainer title="Ultimi Achievement completati" achievements={lastCompletedAchievements}></AchievementContainer>
       <AchievementContainer title="Prossimi Achievement consigliati" achievements={nextAchievementsToComplete}></AchievementContainer>
