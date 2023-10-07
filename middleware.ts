@@ -4,12 +4,16 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebaseConfig';
 
 export function middleware(request: NextRequest) {
-    // Call our authentication function to check the request
-    if (!request.nextUrl.pathname.startsWith('/login') && !isAuthenticated()) {
-        // Respond with JSON indicating an error message
-        return NextResponse.redirect(new URL('/login', request.url))
-    }
 
+    if ((request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/signup'))) {
+        if (isAuthenticated()) {
+            // return NextResponse.redirect(new URL('/home', request.url))
+        }
+    } else {
+        if (!isAuthenticated()) {
+            return NextResponse.redirect(new URL('/login', request.url))
+        }
+    }
     return NextResponse.next();
 }
 
