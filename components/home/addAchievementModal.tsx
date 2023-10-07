@@ -12,18 +12,12 @@ import { auth } from '../../firebaseConfig';
 
 
 export default function AddAchievementModal(props) {
+    const nextAchievementFetch = useSWR(`/api/achievements/nextToComplete/HHoyw2EzJYhwcmfeWoCr1y2K0Dh1/all`, fetcher); // TODO change
+    const achievementsToComplete = nextAchievementFetch.data ? nextAchievementFetch.data.nextAchievementsToComplete : [];
 
-    const nextAchievementFetch = null // useSWR(`/api/achievements/nextToComplete/${userUid}/all`, fetcher);
-
-    const achievementsToComplete = [];
-
-    const [originalList, setOriginalList] = useState(achievementsToComplete);
-    if (originalList !== achievementsToComplete) { // don't update unnecessarily
-        setOriginalList(achievementsToComplete);
-    }
-    const [filteredList, setFilteredList] = useState(originalList);
-    if (filteredList !== originalList) { // don't update unnecessarily
-        setFilteredList(originalList);
+    const [filteredList, setFilteredList] = useState(achievementsToComplete);
+    if (filteredList !== achievementsToComplete) { // don't update unnecessarily
+        setFilteredList(achievementsToComplete);
     }
     const [searchText, setSearchText] = useState('');
     const [showAchievementReviewerModal, setShowAchievementReviewerModal] = useState(false);
@@ -33,7 +27,7 @@ export default function AddAchievementModal(props) {
         setSearchText(newText);
 
         // Filtra la lista originale in base al testo di input
-        const filtered = originalList.filter((item) =>
+        const filtered = achievementsToComplete.filter((item) =>
             item.name.toLowerCase().includes(newText.toLowerCase())
         );
 

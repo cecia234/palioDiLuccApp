@@ -43,7 +43,7 @@ export default function Home() {
     <Stack gap={3}>
       <Button variant='danger' onClick={() => signOut(auth)}>Logout</Button>
       <NewReviewAlert></NewReviewAlert>
-      {/* <AddAchievementButton></AddAchievementButton> */}
+      <AddAchievementButton></AddAchievementButton>
       <AchievementContainer title="Ultimi Achievement completati" achievements={lastCompletedAchievements}></AchievementContainer>
       <AchievementContainer title="Prossimi Achievement consigliati" achievements={nextAchievementsToComplete}></AchievementContainer>
     </Stack>
