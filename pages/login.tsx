@@ -1,34 +1,62 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
 
 import Layout from "../components/layout";
-import {auth} from '../firebaseConfig';
+import { auth } from '../firebaseConfig';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from 'next/router'
+
 
 
 export default function Login() {
-  return (
+  const router = useRouter()
+  const [email, setEmail] = useState('');
+  const [pwd, setPwd] = useState('');
+
+  const onEmailInput = ({ target: { value } }) => setEmail(value);
+  const onPwdInput = ({ target: { value } }) => setPwd(value);
+
+  const onFormSubmit = e => {
+    e.preventDefault()
+
+    console.log(`${email + ' ' + pwd}`)
+
+    signInWithEmailAndPassword(auth, email, pwd)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(`${user} Signed In!!`)
+
+        router.push('/home')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(`NOT Signed In!!`)
+        console.error(errorCode + ' ' + errorMessage)
+      });
+
+  }
+
+  return <>
     <Layout>
-      <Form>
+      <h1>Ben tornato al Palio, effettua il login per cominciare</h1>
+      <Form onSubmit={onFormSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" onChange={onEmailInput} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
+          <Form.Control type="password" placeholder="Password" onChange={onPwdInput} />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+          Log in
         </Button>
       </Form>
 
     </Layout>
-    )       
+  </>
 }
