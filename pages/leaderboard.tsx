@@ -1,8 +1,8 @@
 import useSWR from 'swr';
+import { Table } from 'react-bootstrap';
+
 import { Header } from './index';
-import {Table} from 'react-bootstrap';
-import Layout from '../components/layout';
-import NavigationBar from '../components/navbar';
+
 
 interface IUserScore {
   username: string;
@@ -21,60 +21,11 @@ enum EMedalsPoints {
 }
 
 const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
-/*const userScores: IUserScore[] = [
-  {
-    username: "mario",
-    bronze: 2,
-    silver: 1,
-    gold: 1
-  },
-  {
-    username: "lorenzo",
-    bronze: 5,
-    silver: 1,
-    gold: 2
-  },
-  {
-    username: "nupas",
-    bronze: 3,
-    silver: 3,
-    gold: 3
-  },
-  {
-    username: "mara",
-    bronze: 3,
-    silver: 3,
-    gold: 2
-  },
-  {
-    username: "fra",
-    bronze: 6,
-    silver: 6,
-    gold: 2
-  },
-  {
-    username: "gio",
-    bronze: 4,
-    silver: 1,
-    gold: 5
-  },
-  {
-    username: "ciccio",
-    bronze: 2,
-    silver: 3,
-    gold: 2
-  },
-  {
-    username: "cecia",
-    bronze: 1,
-    silver: 3,
-    gold: 2
-  },
-];*/
+
 export default function LeaderBoard() {
   let userFetch = useSWR('/api/achievements/leaderBoard', fetcher)
   let userScores = [];
-  if(userFetch.data) {
+  if (userFetch.data) {
     userScores = userFetch.data.users
   } else {
     return <h1>Loading...</h1>
@@ -86,7 +37,7 @@ export default function LeaderBoard() {
 
 
   return (
-    <Layout>
+    <>
       <Header title="Classifica" />
       <h2>E tu a che punto sei?</h2>
       <Table striped bordered hover responsive >
@@ -117,7 +68,7 @@ export default function LeaderBoard() {
           })}
         </tbody>
       </Table>
-    </Layout>
+    </>
   );
 }
 
@@ -127,7 +78,7 @@ function getOrderedUsers(users: IUserScore[]) {
 }
 
 function calcTotalMedals(userScore: IUserScore) {
-  return userScore.bronze + userScore.silver+ userScore.gold
+  return userScore.bronze + userScore.silver + userScore.gold
 }
 function calcTotalScore(userScore: IUserScore) {
   return userScore.bronze * EMedalsPoints.BRONZE + userScore.silver * EMedalsPoints.SILVER + userScore.gold * EMedalsPoints.GOLD

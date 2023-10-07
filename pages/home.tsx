@@ -1,15 +1,15 @@
+import { auth } from '../firebaseConfig'
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { IAchievement, IUser } from '../lib/types';
+import { useRouter } from 'next/router'
 import useSWR from 'swr';
-import Layout from "../components/layout";
-import AddAchievementButton from "../components/home/addAchievementButton";
-import AchievementContainer from "../components/home/achievementContainer";
+import { useEffect, useState } from 'react';
 import { Stack } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
+
+import AddAchievementButton from "../components/home/addAchievementButton";
+import AchievementContainer from "../components/home/achievementContainer";
 import NewReviewAlert from "../components/home/newReviewAlert";
-import { IAchievement, IUser } from '../lib/types';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router'
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from '../firebaseConfig'
 
 
 const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
@@ -52,16 +52,14 @@ export default function Home() {
   newRequests = numRequestsFetch.data ? numRequestsFetch.data.numRequests : 0;
 
   return <>
-    <Layout>
-      <h1>Ciao {user.name}, ecco il tuo palio di Lucca finora</h1>
-      <Stack gap={3}>
-        <Button variant='danger' onClick={logout}>Logout</Button>
-        {newRequests ? <NewReviewAlert newRequests={newRequests}></NewReviewAlert> : ''}
-        <AddAchievementButton achievementsToComplete={nextAchievementsToComplete}></AddAchievementButton>
-        <AchievementContainer title="Ultimi Achievement completati" achievements={lastCompletedAchievements}></AchievementContainer>
-        <AchievementContainer title="Prossimi Achievement consigliati" achievements={nextAchievementsToComplete}></AchievementContainer>
-      </Stack>
-    </Layout>
+    <h1>Ciao {user.name}, ecco il tuo palio di Lucca finora</h1>
+    <Stack gap={3}>
+      <Button variant='danger' onClick={logout}>Logout</Button>
+      {newRequests ? <NewReviewAlert newRequests={newRequests}></NewReviewAlert> : ''}
+      <AddAchievementButton achievementsToComplete={nextAchievementsToComplete}></AddAchievementButton>
+      <AchievementContainer title="Ultimi Achievement completati" achievements={lastCompletedAchievements}></AchievementContainer>
+      <AchievementContainer title="Prossimi Achievement consigliati" achievements={nextAchievementsToComplete}></AchievementContainer>
+    </Stack>
   </>
 }
 

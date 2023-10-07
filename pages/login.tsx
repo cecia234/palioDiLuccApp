@@ -1,12 +1,10 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
-
-import Layout from "../components/layout";
-import { auth } from '../firebaseConfig';
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from 'next/router'
 
+import { auth } from '../firebaseConfig';
 
 
 export default function Login() {
@@ -39,24 +37,21 @@ export default function Login() {
 
   }
 
-  return <>
-    <Layout>
-      <h1>Ben tornato al Palio, effettua il login per cominciare</h1>
-      <Form onSubmit={onFormSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" onChange={onEmailInput} />
-        </Form.Group>
+  return (<>
+    <h1>Ben tornato al Palio, effettua il login per cominciare</h1>
+    <Form onSubmit={onFormSubmit}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control type="email" placeholder="Enter email" onChange={onEmailInput} />
+      </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange={onPwdInput} />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Log in
-        </Button>
-      </Form>
-
-    </Layout>
-  </>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" onChange={onPwdInput} />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Log in
+      </Button>
+    </Form>
+  </>)
 }

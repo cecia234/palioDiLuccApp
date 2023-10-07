@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebaseConfig';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { Button, Container, Form, Row } from 'react-bootstrap';
-import Layout from '../components/layout';
+
+import { auth } from '../firebaseConfig';
+
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -37,7 +38,7 @@ const SignUp = () => {
   };
 
   return (
-    <Layout>
+    <>
       <h1>C'è sempre una prima volta al Palio, registrati pure</h1>
       <Form onSubmit={onFormSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -58,7 +59,7 @@ const SignUp = () => {
           Log in
         </Button>
       </Form>
-    </Layout >
+    </>
   )
 }
 
