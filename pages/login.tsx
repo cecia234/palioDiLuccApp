@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { useRouter } from 'next/router'
 
+import Layout from "../components/layout";
 import { auth } from '../firebaseConfig';
 
 
@@ -54,4 +55,12 @@ export default function Login() {
       </Button>
     </Form>
   </>)
+}
+
+Login.getLayout = function getLayout(page) {
+  return (
+    <Layout simplified={true}>
+      {page}
+    </Layout>
+  )
 }

@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function NavigationBar() {
+export default function NavigationBar({ simplified }) {
     const expand = true;
     return (
         <Navbar sticky="top" expand={false} className={styles.navbar}>
@@ -32,7 +32,7 @@ export default function NavigationBar() {
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
-                            <Link href="/">Home</Link>
+                            {simplified ? '' : <Link href="/">Home</Link>}
                             <Link href="/achievementList">Lista Achievement</Link>
                             <Link href="/leaderboard">Classifica</Link>
                             <Link href="/about">Dicono di noi</Link>

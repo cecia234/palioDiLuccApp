@@ -2,10 +2,10 @@ import styles from './layout.module.css';
 import NavigationBar from './navbar';
 
 
-export default function Layout({ children }) {
+export default function Layout({ simplified = false, children }) {
   return (
     <>
-      <NavigationBar ></NavigationBar>
+      <NavigationBar simplified={simplified}></NavigationBar>
       <div className={styles.container}>{children}</div>
     </>
   );
