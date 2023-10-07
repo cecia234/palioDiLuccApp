@@ -28,22 +28,22 @@ export default function Home() {
   }, [])
 
   let userFetch = useSWR(`/api/users/${userUid}`, fetcher)
-  const lastAchievementFetch = useSWR('/api/achievements/lastCompleted', fetcher)
-  const nextAchievementFetch = useSWR('/api/achievements/nextToComplete/9', fetcher)
+  const lastAchievementFetch = useSWR(`/api/achievements/lastCompleted/${userUid}`, fetcher)
+  const nextAchievementFetch = useSWR(`/api/achievements/nextToComplete/${userUid}/9`, fetcher)
   let nextAchievementsToComplete: IAchievement[];
   let lastCompletedAchievements: IAchievement[];
   let user: IUser;
 
-  nextAchievementsToComplete = nextAchievementFetch.data ? nextAchievementFetch.data.nextAchievementsToComplete : [];
-  lastCompletedAchievements = lastAchievementFetch.data ? lastAchievementFetch.data.lastCompletedAchievements : [];
-  user = userFetch.data ? userFetch.data.user : '';
+  lastCompletedAchievements = lastAchievementFetch?.data ? lastAchievementFetch.data.lastCompletedAchievements : [];
+  nextAchievementsToComplete = nextAchievementFetch?.data ? nextAchievementFetch.data.nextAchievementsToComplete : [];
+  user = userFetch?.data ? userFetch.data.user : '';
 
   return <>
     <h1>Ciao {user.name}, ecco il tuo palio di Lucca finora</h1>
     <Stack gap={3}>
       <Button variant='danger' onClick={() => signOut(auth)}>Logout</Button>
       <NewReviewAlert></NewReviewAlert>
-      <AddAchievementButton></AddAchievementButton>
+      {/* <AddAchievementButton></AddAchievementButton> */}
       <AchievementContainer title="Ultimi Achievement completati" achievements={lastCompletedAchievements}></AchievementContainer>
       <AchievementContainer title="Prossimi Achievement consigliati" achievements={nextAchievementsToComplete}></AchievementContainer>
     </Stack>

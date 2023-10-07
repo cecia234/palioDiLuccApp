@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -6,12 +6,16 @@ import Modal from 'react-bootstrap/Modal';
 import styles from './achievement.module.css';
 import SetAchievementReviewerModal from './setAchievementReviewerModal';
 import { fetcher } from '../../utils/fetchUtils';
+import { useRouter } from 'next/router';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
 
 
 export default function AddAchievementModal(props) {
-    const nextAchievementFetch = useSWR('/api/achievements/nextToComplete/all', fetcher);
 
-    const achievementsToComplete = nextAchievementFetch.data ? nextAchievementFetch.data.nextAchievementsToComplete : [];
+    const nextAchievementFetch = null // useSWR(`/api/achievements/nextToComplete/${userUid}/all`, fetcher);
+
+    const achievementsToComplete = [];
 
     const [originalList, setOriginalList] = useState(achievementsToComplete);
     if (originalList !== achievementsToComplete) { // don't update unnecessarily
