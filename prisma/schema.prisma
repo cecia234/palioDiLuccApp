@@ -13,6 +13,7 @@ model user {
   surname                                                        String?
   mail                                                           String?
   propic                                                         String?               @db.VarChar(10)
+  uid                                                            String?               @db.VarChar(50)
   achievement_request_achievement_request_destination_userTouser achievement_request[] @relation("achievement_request_destination_userTouser")
   achievement_request_achievement_request_requesting_userTouser  achievement_request[] @relation("achievement_request_requesting_userTouser")
   user_achievement_user_achievement_userTouser                   user_achievement[]    @relation("user_achievement_userTouser")
