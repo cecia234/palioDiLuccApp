@@ -1,6 +1,6 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from 'next/router'
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import { useEffect, useState } from 'react';
 import { Stack } from "react-bootstrap";
 
@@ -27,7 +27,7 @@ export default function Reviews() {
     }, [])
 
 
-    const lastAchievementFetch = useSWR(`/api/achievements/requests/pending/${userUid}`, fetcher)
+    const lastAchievementFetch = useSWR(`/api/achievements/requests/pending/${userUid}`, fetcher, { refreshInterval: 1000 })
 
     let reviewsRequests = lastAchievementFetch.data ? lastAchievementFetch.data.requests : [];
     reviewsRequests = reviewsRequests.map((item) => {
@@ -38,6 +38,7 @@ export default function Reviews() {
             description: item.achievement_achievement_request_achievementToachievement.description
         }
     })
+
     return <>
         <h1>Hai le seguenti richieste di testimonianza</h1>
         <Stack gap={3}>

@@ -68,8 +68,8 @@ export default function ReviewRequest({ item, uid }) {  // TODO rimuovi uid
     )
 }
 
-function sendTestimonianza(item, status, uid) {/*TODO rimuovi uid*/
-    fetch('/api/achievements/requests/confirm', {
+async function sendTestimonianza(item, status, uid) {/*TODO rimuovi uid*/
+    await fetch('/api/achievements/requests/confirm', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
