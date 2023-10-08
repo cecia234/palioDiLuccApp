@@ -1,3 +1,27 @@
 .navbar {
     background-color: var(--light-red);
 }
+
+.navbarMenu {
+    background-color: var(--background-white);
+}
+
+.menuVoice {
+    color: rgb(47, 47, 47);
+    background-color: var(--light-green);
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 2em;
+    padding: 5%;
+    transition-duration: .5s;
+}
+
+.menuVoice:hover {
+    background-color: var(--dark-green);
+    transition-duration: .5s;
+}
+
+.navbarTitle {
+    padding: 5%;
+    font-size: larger;
+}

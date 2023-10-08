@@ -5,6 +5,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Navbar from 'react-bootstrap/Navbar';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Stack } from 'react-bootstrap';
 
 export default function NavigationBar({ simplified }) {
     const expand = true;
@@ -25,17 +26,19 @@ export default function NavigationBar({ simplified }) {
                     aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                     placement="end"
                 >
-                    <Offcanvas.Header closeButton>
-                        <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                    <Offcanvas.Header closeButton className={styles.navbarMenu}>
+                        <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`} className={styles.navbarTitle}>
                             Menù
                         </Offcanvas.Title>
                     </Offcanvas.Header>
-                    <Offcanvas.Body>
-                        <Nav className="justify-content-end flex-grow-1 pe-3">
-                            {simplified ? '' : <Link href="/">Home</Link>}
-                            <Link href="/achievementList">Lista Achievement</Link>
-                            <Link href="/leaderboard">Classifica</Link>
-                            <Link href="/about">Dicono di noi</Link>
+                    <Offcanvas.Body className={styles.navbarMenu}>
+                        <Nav className={styles.navbarMenu}>
+                            <Stack gap={1}>
+                                {simplified ? '' : <Link href="/" className={styles.menuVoice}>Home</Link>}
+                                <Link href="/achievementList" className={styles.menuVoice}>Lista Achievement</Link>
+                                <Link href="/leaderboard" className={styles.menuVoice}>Classifica</Link>
+                                <Link href="/about" className={styles.menuVoice}>Dicono di noi</Link>
+                            </Stack>
                         </Nav>
                     </Offcanvas.Body>
                 </Navbar.Offcanvas>

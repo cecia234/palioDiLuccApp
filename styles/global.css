@@ -28,15 +28,6 @@ body {
   box-sizing: border-box;
 }
 
-a {
-  color: var(--blue);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 img {
   max-width: 100%;
   display: block;
