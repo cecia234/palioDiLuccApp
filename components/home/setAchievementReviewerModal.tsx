@@ -77,8 +77,8 @@ function Modalina(p) {
     );
 }
 
-function sendAchievementRequest(achievementName, uid, username) {
-    fetch('/api/achievements/requests/make', {
+async function sendAchievementRequest(achievementName, uid, username) {
+    const resp = await fetch('/api/achievements/requests/make', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -90,4 +90,10 @@ function sendAchievementRequest(achievementName, uid, username) {
             "name": achievementName
         })
     })
+
+    if (resp.status >= 200 && resp.status < 400) {
+        alert('Richiesta inviata con successo!');
+    } else {
+        alert("Si è verificato stato un problema con l'invio della richiesta")
+    }
 }

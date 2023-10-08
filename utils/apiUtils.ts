@@ -21,7 +21,7 @@ export async function getAllUserCompletedAchievements(username: string) {
 export async function getUserNonCompletedAchievementsDetails(username: string, limit?: number) {
     const user_completed_achievements = await getAllUserCompletedAchievements(username);
 
-    return await prisma.achievement.findMany({
+    const missing_achievements = await prisma.achievement.findMany({
         where: {
             name: {
                 notIn: user_completed_achievements.map((ach) => ach.achievement)
@@ -30,6 +30,7 @@ export async function getUserNonCompletedAchievementsDetails(username: string, l
         take: limit
     })
 
+    return missing_achievements.map((achivement) => ({ ...achivement, status: 0 }))
 }
 
 
