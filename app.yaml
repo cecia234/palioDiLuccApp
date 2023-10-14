@@ -1,1 +1,4 @@
 runtime: nodejs18
+
+env_variables:
+  DATABASE_URL: postgresql://postgres:pieris@localhost:5432/PALIO?schema=public&host=/cloudsql/paliodiluccap:europe-west6:palio-luccap/
