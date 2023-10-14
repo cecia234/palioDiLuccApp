@@ -18,22 +18,27 @@ const SignUp = () => {
   const onPwd2Input = ({ target: { value } }) => setPasswordTwo(value);
 
 
-  const onFormSubmit = event => {
+  const onFormSubmit = async event => {
     setError(null)
     //check if passwords match. If they do, create user in Firebase
     // and redirect to your logged in page.
-    if (passwordOne === passwordTwo)
-      createUserWithEmailAndPassword(auth, email, passwordOne)
-        .then(authUser => {
-          console.log("Success. The user is created in Firebase")
-          router.push("/home");
-        })
-        .catch(error => {
-          // An error occurred. Set error message to be displayed to user
-          setError(error.message)
-        });
-    else
+    if (passwordOne === passwordTwo) {
+      try {
+        const authUser = await createUserWithEmailAndPassword(auth, email, passwordOne)
+
+
+      } catch (err) {
+        setError(err.message)
+      }
+
+
+
+
+      console.log("Success. The user is created in Firebase")
+      router.push("/home");
+    } else
       setError("Password do not match")
+
     event.preventDefault();
   };
 
