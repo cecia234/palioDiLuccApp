@@ -14,10 +14,21 @@
         "url": "http://localhost:3000"
       },
       {
-        "name": "Next.js: debug full stack",
+        "name": "Next.js: debug full stack (MS)",
         "type": "node-terminal",
         "request": "launch",
-        "command": "npm run dev",
+        "command": "npm run dev-ms",
+        "serverReadyAction": {
+          "pattern": "- Local:.+(https?://.+)",
+          "uriFormat": "%s",
+          "action": "debugWithChrome"
+        }
+      },
+      {
+        "name": "Next.js: debug full stack (UNIX)",
+        "type": "node-terminal",
+        "request": "launch",
+        "command": "npm run dev-unix",
         "serverReadyAction": {
           "pattern": "- Local:.+(https?://.+)",
           "uriFormat": "%s",

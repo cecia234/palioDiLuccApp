@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "next dev",
+    "dev-ms": "next dev",
+    "dev-unix": "export DATABASE_URL=postgresql://postgres:pieris@localhost:5432/PALIO?schema=public; next dev",
     "start": "next start -p 8080",
     "build": "next build"
   },
