@@ -33,7 +33,7 @@ export default function Login() {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(`NOT Signed In!!`)
+        alert('Hai sbagliato qualcosa. Ricontrolla le credenziali.')
         console.error(errorCode + ' ' + errorMessage)
       });
 
