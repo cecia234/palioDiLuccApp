@@ -1,11 +1,11 @@
-import useSWR from 'swr';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 import styles from './achievement.module.css';
 import { getAllUsers } from '../../utils/fetchUtils';
 import { Spinner } from 'react-bootstrap';
+import { AuthContext } from '../../pages/_app';
 interface IUser {
     username: string,
     propic: string
@@ -13,19 +13,22 @@ interface IUser {
 
 
 export default function SetAchievementReviewerModal(p) {
-    let { data, uid, ...props } = p; // TODO rimuovi uid
+    const uid = useContext(AuthContext)
+    let { data, ...props } = p;
+
 
     let { users, isError, isLoading } = getAllUsers()
 
     if (isLoading) return <Spinner />
     if (isError) return <div >Loading</div>
-    const originalList = users.filter((u) => u.uid !== uid); // TODO rimuovi uid
+    const originalList = users.filter((u) => u.uid !== uid);
 
-    return <Modalina uid={uid} achievement={data} originalList={originalList} {...props}></Modalina> // TODO rimuovi uid
+    return <Modalina achievement={data} originalList={originalList} {...props}></Modalina> 
 }
 
 function Modalina(p) {
-    let { uid, achievement, originalList, ...props } = p; // TODO rimuovi uid
+    const uid = useContext(AuthContext)
+    let { achievement, originalList, ...props } = p;
     let [filteredList, setFilteredList] = useState(originalList)
     let [searchText, setSearchText] = useState('')
     const handleInputChange = (e) => {

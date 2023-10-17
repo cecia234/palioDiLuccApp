@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -6,13 +6,11 @@ import Modal from 'react-bootstrap/Modal';
 import styles from './achievement.module.css';
 import SetAchievementReviewerModal from './setAchievementReviewerModal';
 import { fetcher } from '../../utils/fetchUtils';
-import { useRouter } from 'next/router';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import { AuthContext } from '../../pages/_app';
 
 
 export default function AddAchievementModal(props) {
-    const uid = 'HHoyw2EzJYhwcmfeWoCr1y2K0Dh1'; // TODO change
+    const uid = useContext(AuthContext);
     const nextAchievementFetch = useSWR(`/api/achievements/nextToComplete/${uid}/all`, fetcher);
     const achievementsToComplete = nextAchievementFetch.data ? nextAchievementFetch.data.nextAchievementsToComplete : [];
 
@@ -75,7 +73,6 @@ export default function AddAchievementModal(props) {
                 show={showAchievementReviewerModal}
                 onHide={() => setShowAchievementReviewerModal(false)}
                 data={selectedAchievement}
-                uid={uid}
             />
         </>
     );
