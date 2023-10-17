@@ -5,6 +5,8 @@ import { EAchievementStatus, IAchievement } from "../lib/types";
 import styles from './achievementList.module.css'
 import { useContext } from 'react';
 import { AuthContext } from './_app';
+import Layout from '../components/layout';
+import NavigationBar from '../components/navbar';
 
 
 let achievements = {} as any;
@@ -27,20 +29,38 @@ export default function AchievementList() {
 
     return <>
         <h1>Lista achievements</h1>
-        <Accordion defaultActiveKey={['Viaggio 🚗️', 'Fiera🎪️', 'Appartamento 🏡️']}>
+        <Accordion defaultActiveKey={['Viaggio 🚗️', 'Fiera🎪️', 'Appartamento 🏡️']} >
             {
                 Object.keys(sectionedAchievements).map((sectionName) => {
                     const section = sectionedAchievements[sectionName];
                     const sectionElements = section.map((item) => {
                         const element = (
                             <div className={item.status === EAchievementStatus.DONE ? styles.done : styles.undone}>
-                                <p>
-                                    {item.icon} <b>{item.name}</b> {item.status === EAchievementStatus.DONE ? '✅' : ''}
-                                </p>
-                                <p><i>{item.description}</i></p>
+                                <div>
+                                    <p>
+                                        {item.icon} <b>{item.name}</b> {item.status === EAchievementStatus.DONE ? '✅' : ''}
+                                    </p>
+                                    <p><i>{item.description}</i></p>
+                                </div>
+                                <div className={styles.imageContainer}>
+                                <img src='/images/TIMBROLUCCA.svg' className={styles.imageUndone}></img>
+                                {
+                                  (  item.status === EAchievementStatus.DONE ?
+
+                                <img src='/images/TIMBROLUCCA.svg' id={`stamp-${item.name.replaceAll(' ', '-')}`} className={styles.stamp}></img>
+                                :
+                                '')
+                                }
+                                 <style>{`
+                                    #${`stamp-${item.name.replaceAll(' ', '-')}`} {
+                                        transform: rotate(${Math.random()*100}deg);
+                                    }
+                                `}</style>
+                                </div>
                             </div>
                         )
 
+                        
                         return element
 
                     })
@@ -59,3 +79,12 @@ export default function AchievementList() {
 }
 
 const groupBy = (x,f)=>x.reduce((a,b,i)=>((a[f(b,i,x)]||=[]).push(b),a),{});
+
+AchievementList.getLayout = function getLayout(page) {
+    return (
+        <>
+        <NavigationBar simplified={false}></NavigationBar>
+        <div className={styles.accordion}>{page}</div>
+      </>
+    )
+  }
