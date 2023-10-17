@@ -11,7 +11,7 @@ INSERT INTO public.achievement VALUES ('IL MASSIMO ESPERTO: EDIZIONE “AUTOSTRA
 INSERT INTO public.achievement VALUES ('MAXONE', 'Canta l’intera “La Regina del Celebrità” a memoria.', '🫅', 1);
 INSERT INTO public.achievement VALUES ('STUN GRENADE', 'Scoreggiona rigorosamente silenziosa in macchina .', '💀', 2);
 INSERT INTO public.achievement VALUES ('UNA COCHINA BELLA FRESCA (gone wrong)', 'Rovescia una bevanda in auto.', '🤬', 1);
-
+UPDATE public.achievement set section='viaggio';
 -- Sezione Fiera
 
 INSERT INTO public.achievement VALUES ('IL RITORNO DEL BROLYCULO', 'Sai già cosa devi fare.', '🍑', 1);
@@ -58,7 +58,7 @@ INSERT INTO public.achievement VALUES ('WATCHMEN', 'Chiedere che ore sono ad uno
 INSERT INTO public.achievement VALUES ('STUNNATO', 'Chiedere in fiera dov’è il Lucca Comics.', '🫨', 1);
 INSERT INTO public.achievement VALUES ('EL SOL MAGNA LE ORE', 'Entra a Lucca entro le 7.30 am.', '🌄', 3);
 INSERT INTO public.achievement VALUES ('COSPLAY DI VICTORLAZLO', 'Bevi almeno 7 alcolici in una serata.', '🍷', 3);
-
+UPDATE public.achievement set section='fiera';
 -- Sezione Appartamento
 
 INSERT INTO public.achievement VALUES ('NOSTALGICO', 'Dormi in sacco a pelo per tutta la durata del soggiorno. Punti bonus se non usi la doccia.', '🛏️', 3);
@@ -70,3 +70,4 @@ INSERT INTO public.achievement VALUES ('IL MASSIMO ESPERTO: EDIZIONE “ECONOMIA
 INSERT INTO public.achievement VALUES ('LA FATINA DEI DENTI', 'Metti una monetina sotto il cuscino del bambino fortunato.', '🪙', 2);
 INSERT INTO public.achievement VALUES ('MOMENTO FRATERNO', 'Urla “bruh” a squarciagola nel cuore della notte. Punti in più se si sveglia qualcuno.', '📣', 2);
 INSERT INTO public.achievement VALUES ('SKIBIDI TOILET', 'Neutralizza la skibidi toilet.', '🛁', 2);
+UPDATE public.achievement set section='appartamento';

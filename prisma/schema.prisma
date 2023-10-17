@@ -12,18 +12,19 @@ model user {
   name                                                           String?
   surname                                                        String?
   mail                                                           String?
-  propic                                                         String?               @db.VarChar(10)
   uid                                                            String?               @db.VarChar(50)
+  propic                                                         String?
   achievement_request_achievement_request_destination_userTouser achievement_request[] @relation("achievement_request_destination_userTouser")
   achievement_request_achievement_request_requesting_userTouser  achievement_request[] @relation("achievement_request_requesting_userTouser")
   user_achievement_user_achievement_userTouser                   user_achievement[]    @relation("user_achievement_userTouser")
 }
 
 model achievement {
-  name                                                             String                @id @db.VarChar(50)
+  name                                                             String                @id @db.VarChar(150)
   description                                                      String?
   icon                                                             String?               @db.VarChar(5)
   difficulty                                                       Int?
+  section                                                          String?               @db.VarChar(100)
   achievement_request_achievement_request_achievementToachievement achievement_request[] @relation("achievement_request_achievementToachievement")
   user_achievement_user_achievement_achievementToachievement       user_achievement[]    @relation("user_achievement_achievementToachievement")
 }

@@ -5,6 +5,8 @@ create table if not exists public."user" (
 	"name" text,
 	surname text,
 	mail text,
+	propic text,
+	uid varchar(50),
 	primary key(username)
 );
 
@@ -14,6 +16,7 @@ create table if not exists public."achievement" (
 	"description" text,
 	"icon" varchar(5),
 	"difficulty" int,
+	section varchar(100),
 	primary key("name")
 );
 
