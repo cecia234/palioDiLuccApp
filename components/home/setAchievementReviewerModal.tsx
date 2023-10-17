@@ -66,7 +66,7 @@ function Modalina(p) {
                             {filteredList.map((item) => (
                                 <div className={styles.achievementDiv} key={item.username} onClick={() => {
                                     props.onHide()
-                                    sendAchievementRequest(achievement.name, uid, item.username) // TODO rimuovi uid
+                                    sendAchievementRequest(achievement.name, uid, item.username)
                                 }}><p>{item.propic}  <b>{item.username}</b></p></div>
                             ))}
                         </div>
@@ -88,7 +88,7 @@ async function sendAchievementRequest(achievementName, uid, username) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "requesting": uid,  // TODO rimuovi uid
+            "requesting": uid,
             "destination": username,
             "name": achievementName
         })
