@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { Stack } from "react-bootstrap";
+import { Accordion, Stack } from "react-bootstrap";
 
 import { EAchievementStatus, IAchievement } from "../lib/types";
 import styles from './achievementList.module.css'
@@ -7,7 +7,8 @@ import { useContext } from 'react';
 import { AuthContext } from './_app';
 
 
-let achievements = []
+let achievements = {} as any;
+let sectionedAchievements = {}
 const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
 
 export default function AchievementList() {
@@ -16,16 +17,20 @@ export default function AchievementList() {
 
     if (achievementList.data) {
         achievements = groupBy(achievementList.data.achievements, (achievement) => achievement.section)
+
+        sectionedAchievements['Viaggio 🚗️'] =achievements.viaggio;
+        sectionedAchievements['Fiera🎪️'] =achievements.fiera;
+        sectionedAchievements['Appartamento 🏡️'] =achievements.appartamento;
     } else {
         return <h1>Loading...</h1>
     }
 
     return <>
         <h1>Lista achievements</h1>
-        <Stack gap={3}>
+        <Accordion defaultActiveKey={['Viaggio 🚗️', 'Fiera🎪️', 'Appartamento 🏡️']}>
             {
-                Object.keys(achievements).map((sectionName) => {
-                    const section = achievements[sectionName];
+                Object.keys(sectionedAchievements).map((sectionName) => {
+                    const section = sectionedAchievements[sectionName];
                     const sectionElements = section.map((item) => {
                         const element = (
                             <div className={item.status === EAchievementStatus.DONE ? styles.done : styles.undone}>
@@ -40,14 +45,16 @@ export default function AchievementList() {
 
                     })
                     
-                    return <div key={sectionName}>
-                        <h2>{sectionName}</h2>
-                        <hr></hr>
-                        {sectionElements}
-                    </div>
+                    return <Accordion.Item eventKey={sectionName}>
+                        <Accordion.Header><b>{sectionName}</b></Accordion.Header>
+                        <Accordion.Body>
+                            {sectionElements}
+                        </Accordion.Body>
+                    </Accordion.Item>
             })
             }
-        </Stack>
+
+        </Accordion>
     </>
 }
 
