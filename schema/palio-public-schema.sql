@@ -9,7 +9,7 @@ create table if not exists public."user" (
 	uid varchar(50),
 	primary key(username)
 );
-
+alter table public."user" add constraint unique_uid unique (uid);
 
 create table if not exists public."achievement" (
 	"name" varchar(50),

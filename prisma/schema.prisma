@@ -12,7 +12,7 @@ model user {
   name                                                           String?
   surname                                                        String?
   mail                                                           String?
-  uid                                                            String?               @db.VarChar(50)
+  uid                                                            String?               @unique(map: "unique_uid") @db.VarChar(50)
   propic                                                         String?
   achievement_request_achievement_request_destination_userTouser achievement_request[] @relation("achievement_request_destination_userTouser")
   achievement_request_achievement_request_requesting_userTouser  achievement_request[] @relation("achievement_request_requesting_userTouser")
