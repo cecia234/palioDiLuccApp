@@ -9,13 +9,16 @@ import Layout from '../components/layout';
 import NavigationBar from '../components/navbar';
 
 
-let achievements = {} as any;
+let achievements = {} as any;    
+let user;
 let sectionedAchievements = {}
 const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
 
 export default function AchievementList() {
     const uid = useContext(AuthContext);
     const achievementList = useSWR('/api/achievements/all/'+uid, fetcher)
+    let userFetch = useSWR(`/api/users/${uid}/infos`, uid ? fetcher : () => {})
+
 
     if (achievementList.data) {
         achievements = groupBy(achievementList.data.achievements, (achievement) => achievement.section)
@@ -23,6 +26,12 @@ export default function AchievementList() {
         sectionedAchievements['Viaggio 🚗️'] =achievements.viaggio;
         sectionedAchievements['Fiera🎪️'] =achievements.fiera;
         sectionedAchievements['Appartamento 🏡️'] =achievements.appartamento;
+    } else {
+        return <h1>Loading...</h1>
+    }
+
+    if(userFetch.data) {
+        user = userFetch.data.user;
     } else {
         return <h1>Loading...</h1>
     }
@@ -42,20 +51,22 @@ export default function AchievementList() {
                                     </p>
                                     <p><i>{item.description}</i></p>
                                 </div>
-                                <div className={styles.imageContainer}>
-                                <img src='/images/TIMBROLUCCA.svg' className={styles.imageUndone}></img>
-                                {
-                                  (  item.status === EAchievementStatus.DONE ?
+                                <div className={styles.stampContainer}>
+                                    <div className={styles.stampPlaceholderContainer}>
+                                        <img src='/images/TIMBROLUCCA.svg' className={styles.stampPlaceholder}></img>
+                                    </div>
+                                    {
+                                    (  item.status === EAchievementStatus.DONE ?
 
-                                <img src='/images/TIMBROLUCCA.svg' id={`stamp-${item.name.replaceAll(' ', '-')}`} className={styles.stamp}></img>
-                                :
-                                '')
-                                }
-                                 <style>{`
-                                    #${`stamp-${item.name.replaceAll(' ', '-')}`} {
-                                        transform: rotate(${Math.random()*100}deg);
+                                    <img src='/images/TIMBROLUCCA.svg' id={`stamp-${item.name.replaceAll(' ', '-')}`} className={styles.stamp}></img>
+                                    :
+                                    '')
                                     }
-                                `}</style>
+                                    <style>{`
+                                        #${`stamp-${item.name.replaceAll(' ', '-')}`} {
+                                            transform: rotate(${getStampUniqueRotation(user.username, item.name)}deg);
+                                        }
+                                    `}</style>
                                 </div>
                             </div>
                         )
@@ -88,3 +99,21 @@ AchievementList.getLayout = function getLayout(page) {
       </>
     )
   }
+
+function getStampUniqueRotation(username: string, achievementName: string) {
+    const codedUsername = getTotalCharCode(username);
+    const codedAch = getTotalCharCode(achievementName);
+
+    return codedUsername + codedAch;
+}
+
+function getTotalCharCode(s: string): number{
+    let charCodeArr = [];
+    
+    for(let i = 0; i < s.length; i++){
+        let code = s.charCodeAt(i);
+        charCodeArr.push(code);
+    }
+    
+    return charCodeArr.reduce((partialSum, a) => partialSum + a, 0);
+}

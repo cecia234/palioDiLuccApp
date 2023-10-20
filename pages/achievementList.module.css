@@ -26,21 +26,27 @@ and (min-device-width: 1100px)
     position: absolute;
 }
 
-.imageUndone {
+.stampPlaceholderContainer {
+    position: relative;
+    top:0;
+    left: 0;
+}
+
+.stampPlaceholder {
     opacity: 20%;
     height: 110px !important;
     width: 110px!important;
     position: relative;
     top:0;
     left: 0;
-}
-
-.imageContainer {
-    display: flex;
-    align-items: center;
     border-color: black;
     border-style: solid;
     border-width: .2px;
+}
+
+.stampContainer {
+    display: flex;
+    align-items: center;
 
     position: relative;
     top: 0;
@@ -72,8 +78,14 @@ and (max-device-width: 1000px)
         width: 100px !important;
         position: absolute;
     }
+
+    .stampPlaceholderContainer {
+        border-color: black;
+        border-style: solid;
+        border-width: .2px;
+    }
     
-    .imageUndone {
+    .stampPlaceholder {
         opacity: 20%;
         height: 110px !important;
         width: 110px!important;
@@ -82,7 +94,7 @@ and (max-device-width: 1000px)
         left: 0;
     }
     
-    .imageContainer {
+    .stampContainer {
         display: flex;
         align-items: center;
         border-color: black;
