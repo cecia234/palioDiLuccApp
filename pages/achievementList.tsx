@@ -5,7 +5,6 @@ import { EAchievementStatus, IAchievement } from "../lib/types";
 import styles from './achievementList.module.css'
 import { useContext } from 'react';
 import { AuthContext } from './_app';
-import Layout from '../components/layout';
 import NavigationBar from '../components/navbar';
 
 

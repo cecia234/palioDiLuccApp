@@ -80,9 +80,9 @@ and (max-device-width: 1000px)
     }
 
     .stampPlaceholderContainer {
-        border-color: black;
-        border-style: solid;
-        border-width: .2px;
+        position: relative;
+        top:0;
+        left: 0;
     }
     
     .stampPlaceholder {
@@ -92,15 +92,15 @@ and (max-device-width: 1000px)
         position: relative;
         top:0;
         left: 0;
+        border-color: black;
+        border-style: solid;
+        border-width: .2px;
     }
     
     .stampContainer {
         display: flex;
         align-items: center;
-        border-color: black;
-        border-style: solid;
-        border-width: .2px;
-    
+
         position: relative;
         top: 0;
         left: 0;
