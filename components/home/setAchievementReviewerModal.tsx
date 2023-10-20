@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 import styles from './achievement.module.css';
-import { getAllUsers } from '../../utils/fetchUtils';
+import { getAllUsersAvailableForAchievementRequest } from '../../utils/fetchUtils';
 import { Spinner } from 'react-bootstrap';
 import { AuthContext } from '../../pages/_app';
 interface IUser {
@@ -17,7 +17,7 @@ export default function SetAchievementReviewerModal(p) {
     let { data, ...props } = p;
 
 
-    let { users, isError, isLoading } = getAllUsers()
+    let { users, isError, isLoading } = getAllUsersAvailableForAchievementRequest(uid, data.name)
 
     if (isLoading) return <Spinner />
     if (isError) return <div >Loading</div>

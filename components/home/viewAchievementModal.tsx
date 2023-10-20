@@ -41,12 +41,16 @@ export default function ViewAchievementModal(props) {
                 </Modal.Footer>
             </Modal>
 
-            <SetAchievementReviewerModal
-                show={showAchievementReviewerModal}
-                onHide={() => setShowAchievementReviewerModal(false)}
-                data={props.data}
-                uid='HHoyw2EzJYhwcmfeWoCr1y2K0Dh1'
-            />
+            {
+                showAchievementReviewerModal
+                &&
+                <SetAchievementReviewerModal
+                    show={showAchievementReviewerModal}
+                    onHide={() => setShowAchievementReviewerModal(false)}
+                    data={props.data}
+                    uid='HHoyw2EzJYhwcmfeWoCr1y2K0Dh1'
+                />
+            }
         </>
     );
 }

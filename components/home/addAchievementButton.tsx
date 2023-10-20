@@ -13,10 +13,14 @@ export default function AddAchievementButton() {
                 Aggiungi achievement
             </Button>
 
-            <AddAchievementModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
+            {
+                modalShow
+                &&
+                <AddAchievementModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />
+            }
         </>
     )
 }

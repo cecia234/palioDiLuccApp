@@ -10,10 +10,12 @@ import Button from 'react-bootstrap/Button';
 import AddAchievementButton from "./addAchievementButton";
 import AchievementContainer from "./achievementContainer";
 import NewReviewAlert from "./newReviewAlert";
+import { useRouter } from 'next/router';
 
 
-export default function HomeBody({userUid}) {          
-    let userFetch = useSWR(`/api/users/${userUid}`, userUid? fetcher : () => {})
+export default function HomeBody({userUid}) {   
+    const router = useRouter();       
+    let userFetch = useSWR(`/api/users/${userUid}/infos`, userUid? fetcher : () => {})
     const lastAchievementFetch = useSWR(`/api/achievements/lastCompleted/${userUid}`, userUid? fetcher : () => {})
     const nextAchievementFetch = useSWR(`/api/achievements/nextToComplete/${userUid}/9`, userUid? fetcher : () => {})
     let nextAchievementsToComplete: IAchievement[];
@@ -23,7 +25,10 @@ export default function HomeBody({userUid}) {
     lastCompletedAchievements = lastAchievementFetch?.data ? lastAchievementFetch.data.lastCompletedAchievements : [];
     nextAchievementsToComplete = nextAchievementFetch?.data ? nextAchievementFetch.data.nextAchievementsToComplete : [];
     user = userFetch?.data ? userFetch.data.user : {name: ''};
-    const signOutFunc = () => {signOut(auth)};
+    const signOutFunc = () => {
+      signOut(auth) 
+      router.push('/login');
+    };
 
     return <>
     <h1>Ciao {user.name}, ecco il tuo palio di Lucca finora</h1>
