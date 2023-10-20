@@ -6,8 +6,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Stack } from 'react-bootstrap';
+import useWindowDimensions from '../hooks/useWindowsDimensions';
 
 export default function NavigationBar({ simplified }) {
+    const { height, width } = useWindowDimensions();
     const expand = true;
     return (
         <Navbar sticky="top" expand={false} className={styles.navbar}>
@@ -15,8 +17,8 @@ export default function NavigationBar({ simplified }) {
                 <Link href="/">
                     <Image
                         src="/images/TIMBROLUCCA.svg" // Route of the image file
-                        height={typeof window !== "undefined" ? window.innerHeight * 0.1 : 50} // Desired size with correct aspect ratio
-                        width={typeof window !== "undefined" ? window.innerHeight * 0.1 : 50} // Desired size with correct aspect ratio
+                        height={height*0.1 || 50} // Desired size with correct aspect ratio
+                        width={width*0.1 || 50} // Desired size with correct aspect ratio
                         alt="Your Name"
                     />
                 </Link>
