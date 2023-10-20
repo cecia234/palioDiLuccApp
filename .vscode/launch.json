@@ -22,6 +22,9 @@
           "pattern": "- Local:.+(https?://.+)",
           "uriFormat": "%s",
           "action": "debugWithChrome"
+        },
+        "env": {
+          "NODE_ENV": "development"
         }
       },
       {
@@ -33,6 +36,9 @@
           "pattern": "- Local:.+(https?://.+)",
           "uriFormat": "%s",
           "action": "debugWithChrome"
+        },
+        "env": {
+          "NODE_ENV": "development"
         }
       }
     ]
