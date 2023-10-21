@@ -1,14 +1,18 @@
 
+import { useRouter } from 'next/router';
 import HomeBody from '../components/home/homeBody';
-import {AuthContext} from './_app'
-import { useContext } from 'react';
+import { AuthContext } from './_app'
+import { useContext, useEffect } from 'react';
 
 export default function Home() {
-    const userUid = useContext(AuthContext);
+  const userUid = useContext(AuthContext);
 
-    if(userUid) {
-      return <HomeBody userUid={userUid}></HomeBody>
-    } else {
-      return <h1>Loading...</h1>
-  }
+  const router = useRouter();
+  useEffect(() => {
+    if (!userUid) {
+      router.push('/login')
+    }
+  }, [])
+
+  return <HomeBody userUid={userUid}></HomeBody>;
 }
