@@ -17,8 +17,8 @@ export default function NavigationBar({ simplified }) {
                 <Link href="/">
                     <Image
                         src="/images/TIMBROLUCCA.svg" // Route of the image file
-                        height={height*0.1 || 50} // Desired size with correct aspect ratio
-                        width={width*0.1 || 50} // Desired size with correct aspect ratio
+                        height={height * 0.1 || 50} // Desired size with correct aspect ratio
+                        width={width * 0.1 || 50} // Desired size with correct aspect ratio
                         alt="Your Name"
                     />
                 </Link>
@@ -38,7 +38,7 @@ export default function NavigationBar({ simplified }) {
                             <Stack gap={1}>
                                 {simplified ? '' : <Link href="/" className={styles.menuVoice}>Home</Link>}
                                 <Link href="/achievementList" className={styles.menuVoice}>Lista Achievement</Link>
-                                <Link href="/leaderboard" className={styles.menuVoice}>Classifica</Link>
+                                {simplified ? '' : <Link href="/leaderboard" className={styles.menuVoice}>Classifica</Link>}
                                 <Link href="/about" className={styles.menuVoice}>Dicono di noi</Link>
                             </Stack>
                         </Nav>

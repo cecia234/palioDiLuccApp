@@ -2,6 +2,9 @@ import useSWR from 'swr';
 import { Table } from 'react-bootstrap';
 
 import { Header } from './index';
+import { fetcher } from '../utils/fetchUtils';
+import { useContext } from 'react';
+import { AuthContext } from './_app';
 
 
 interface IUserScore {
@@ -20,13 +23,15 @@ enum EMedalsPoints {
   BRONZE = 1
 }
 
-const fetcher = (...args) => fetch(...[(args as any)]).then((res) => res.json())
-
 export default function LeaderBoard() {
-  let userFetch = useSWR('/api/achievements/leaderBoard', fetcher)
+  const uid = useContext(AuthContext);
+  let currentUserFetch = useSWR(`/api/users/${uid}/infos`, fetcher)
+  let leaderboardFetch = useSWR('/api/achievements/leaderBoard', fetcher)
   let userScores = [];
-  if (userFetch.data) {
-    userScores = userFetch.data.users
+  let currentUserName = '';
+  if (leaderboardFetch.data && currentUserFetch.data) {
+    userScores = leaderboardFetch.data.users
+    currentUserName = currentUserFetch.data.user.name
   } else {
     return <h1>Loading...</h1>
   }
@@ -57,7 +62,7 @@ export default function LeaderBoard() {
             return (
               <tr>
                 <td>{user.pos}</td>
-                <td>{user.username === 'marione' ? <b>{user.username}</b> : user.username}</td>
+                <td>{user.username === currentUserName ? <b>{user.username}</b> : user.username}</td>
                 <td>{user.score}</td>
                 <td>{user.bronze}</td>
                 <td>{user.silver}</td>

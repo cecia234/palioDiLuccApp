@@ -8,6 +8,16 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    const usersObj = {};
+    const users = await prisma.user.findMany()
+
+    users.forEach((user) => {
+        usersObj[user.name] = {
+            bronze: 0,
+            silver: 0,
+            gold: 0
+        }
+    })
 
     const user_achievements_codes = (await prisma.user_achievement.findMany({
         where: {
@@ -29,7 +39,6 @@ export default async function handler(
         user: el.user_user_achievement_userTouser.name,
         difficulty: el.achievement_user_achievement_achievementToachievement.difficulty,
     }))
-    const usersObj = {};
     user_achievements_codes.forEach((achievement) => {
         if (!usersObj[achievement.user]) {
             usersObj[achievement.user] = {
