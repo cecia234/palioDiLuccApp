@@ -6,7 +6,8 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const requesting_user = req.body.requesting
-    const destination_user_uid = req.body.destination/*TODO rimuovi uid*/
+    // destination is the one who is confirming
+    const destination_user_uid = req.body.destination
     const achievement = req.body.name
     const result = req.body.result
 
@@ -30,6 +31,30 @@ export default async function handler(
             user: requesting_user,
             achievement,
             status: 2
+        }
+    })
+
+    await prisma.achievement_request.updateMany({
+        where: {
+            AND: [
+                {
+                    requesting_user: requesting_user
+                },
+                {
+                    destination_user: {
+                        notIn: [user.username]
+                    }
+                },
+                {
+                    achievement: achievement
+                },
+                {
+                    status: 0
+                }
+            ]
+        },
+        data: {
+            status: 3
         }
     })
 
