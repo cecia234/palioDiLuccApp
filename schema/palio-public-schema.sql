@@ -12,7 +12,7 @@ create table if not exists public."user" (
 alter table public."user" add constraint unique_uid unique (uid);
 
 create table if not exists public."achievement" (
-	"name" varchar(50),
+	"name" varchar(150),
 	"description" text,
 	"icon" varchar(5),
 	"difficulty" int,

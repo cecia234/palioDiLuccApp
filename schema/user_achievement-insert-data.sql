@@ -1,4 +1,12 @@
-insert into public."user_achievement"("user", "achievement", "status") values('cecia234', 'NANOMACHINES, SON!', 2);
-insert into public."user_achievement"("user", "achievement", "status") values('marione',  'NANOMACHINES, SON!', 2);
-insert into public."user_achievement"("user", "achievement", "status") values('cicc55',   'NANOMACHINES, SON!', 2);
-insert into public."user_achievement"("user", "achievement", "status") values('marass',   'NANOMACHINES, SON!', 2);
+INSERT INTO public.user_achievement VALUES ('cecia234', 'NANOMACHINES, SON!', 2);
+INSERT INTO public.user_achievement VALUES ('marione', 'NANOMACHINES, SON!', 2);
+INSERT INTO public.user_achievement VALUES ('cicc55', 'NANOMACHINES, SON!', 2);
+INSERT INTO public.user_achievement VALUES ('marass', 'NANOMACHINES, SON!', 2);
+INSERT INTO public.user_achievement VALUES ('cecia234', 'LA CUMMINA', 2);
+INSERT INTO public.user_achievement VALUES ('cecia234', 'IL RITORNO DEL BROLYCULO', 2);
+INSERT INTO public.user_achievement VALUES ('cecia234', 'PARITA’', 2);
+INSERT INTO public.user_achievement VALUES ('cecia234', 'ULTRA SIDE CHARACTER', 2);
+INSERT INTO public.user_achievement VALUES ('marione', 'GOURMET RACE', 2);
+INSERT INTO public.user_achievement VALUES ('marione', 'IL RITORNO DEL BROLYCULO', 2);
+INSERT INTO public.user_achievement VALUES ('marione', 'ULTRA SIDE CHARACTER', 2);
+INSERT INTO public.user_achievement VALUES ('marione', 'JACKPOT!!!', 2);
