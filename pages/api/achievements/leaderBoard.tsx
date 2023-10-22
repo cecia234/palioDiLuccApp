@@ -12,7 +12,7 @@ export default async function handler(
     const users = await prisma.user.findMany()
 
     users.forEach((user) => {
-        usersObj[user.name] = {
+        usersObj[user.username] = {
             bronze: 0,
             silver: 0,
             gold: 0
@@ -26,7 +26,7 @@ export default async function handler(
         include: {
             user_user_achievement_userTouser: {
                 select: {
-                    name: true
+                    username: true
                 }
             },
             achievement_user_achievement_achievementToachievement: {
@@ -36,7 +36,7 @@ export default async function handler(
             }
         },
     })).map((el) => ({
-        user: el.user_user_achievement_userTouser.name,
+        user: el.user_user_achievement_userTouser.username,
         difficulty: el.achievement_user_achievement_achievementToachievement.difficulty,
     }))
     user_achievements_codes.forEach((achievement) => {
