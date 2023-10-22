@@ -20,11 +20,6 @@ export default function App({ Component, pageProps }) {
         setUser(null)
       }
     });
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/service-worker.js')
-        .then((registration) => console.log('scope is: ', registration.scope));
-    }
   }, [])
 
   // Use the layout defined at the page level, if available
